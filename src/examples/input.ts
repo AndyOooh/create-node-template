@@ -1,4 +1,3 @@
-import inquirer, { QuestionCollection } from 'inquirer';
 import chalk from 'chalk';
 
 const hexRegEx: RegExp = /([0-9]|[a-f])/gim;
