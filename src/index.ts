@@ -10,7 +10,9 @@ console.log('🤡🧪 Helloooo World!');
  * Input prompt example
  */
 
-// const questions = inpuQuestions
+const questions = inpuQuestions
+console.log('🚀  questions:', questions)
+
 // const questions = listInquiry;
 // inquirer.prompt(questions).then((answers: Record<string, any>) => {
 //   console.log(JSON.stringify(answers, null, '  '));
