@@ -1,6 +1,6 @@
 import checkbox, { Separator } from '@inquirer/checkbox';
 
-export const answer = checkbox({
+export const packageManagers = checkbox({
   message: 'Select a package manager',
   choices: [
     { name: 'npm', value: 'npm' },

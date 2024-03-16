@@ -2,22 +2,28 @@
 import inquirer from 'inquirer';
 import { inpuQuestions } from './examples/input.js';
 import { listInquiry } from './examples/list.js';
-import { answer } from './examples/checkbox.js';
+import { packageManagers } from './examples/checkbox.js';
 
 console.log('🤡🧪 Helloooo World!');
 
 /**
  * Input prompt example
  */
+const main = async () => {
+  // Select package manager
+  // Select name of project
+  // Start node project with -y command using the chosen package manager
 
-const questions = inpuQuestions
-console.log('🚀  questions:', questions)
+  // const questions = inpuQuestions
+  const questions = listInquiry;
+  const answers: Record<string, any> = await inquirer.prompt(questions);
+  console.log(JSON.stringify(answers, null, '  '));
+  // inquirer.prompt(questions).then((answers: Record<string, any>) => {
+  //   console.log(JSON.stringify(answers, null, '  '));
+  // });
 
-// const questions = listInquiry;
-// inquirer.prompt(questions).then((answers: Record<string, any>) => {
-//   console.log(JSON.stringify(answers, null, '  '));
-// });
+  // const packManagers = packageManagers;
+  // console.log('🚀  packManagers:', packManagers);
+};
 
-
-
-console.log('🤡🤡 Answer: ', answer);
+main();
