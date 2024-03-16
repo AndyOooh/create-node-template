@@ -2,7 +2,7 @@
 import inquirer from 'inquirer';
 import { inpuQuestions } from './examples/input.js';
 import { listInquiry } from './examples/list.js';
-import checkbox, { Separator } from '@inquirer/checkbox';
+import { answer } from './examples/checkbox.js';
 
 console.log('🤡🧪 Helloooo World!');
 
@@ -16,21 +16,6 @@ console.log('🤡🧪 Helloooo World!');
 //   console.log(JSON.stringify(answers, null, '  '));
 // });
 
-const answer = checkbox({
-  message: 'Select a package manager',
-  choices: [
-    { name: 'npm', value: 'npm' },
-    { name: 'yarn', value: 'yarn' },
-    { name: 'bun', value: 'bun', checked: true },
-    { name: 'pnpm', value: 'pnpm', checked: true },
-    new Separator(),
-    { name: 'pnpm', value: 'pnpm', disabled: true },
-    {
-      name: 'pnpm',
-      value: 'pnpm',
-      disabled: '(pnpm is not available)',
-    },
-  ],
-});
+
 
 console.log('🤡🤡 Answer: ', answer);
