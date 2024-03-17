@@ -1,8 +1,8 @@
 #! /usr/bin/env tsx
 
-import { runWithCommander } from './commander';
+import { runWithCommander } from './loaders/commander';
 import { runner } from './config';
-import { runWithInquirer } from './inquirer';
+import { runWithInquirer } from './loaders/inquirer';
 import { runWithNode } from './vanilla-node';
 import { cyan, magenta, magentaBright, red, underline, yellow } from './vanilla-node/utils';
 
