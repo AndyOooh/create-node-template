@@ -28,7 +28,7 @@
     "build": "tsc && resolve-tspaths",
     "copy-templates": "cp -r templates dist/",
     "dev": "tsx watch src/index.ts",
-    "publish:patch": "yarn build && yarn copy-templates && npm version patch && sleep 2 && npm publish",
+    "publish:patch": "yarn build && yarn copy-templates && npm version patch && sleep 2 && npm publish --registry=https://registry.npmjs.org/",
     "start": "tsx dist/index.js"
   },
   "devDependencies": {
