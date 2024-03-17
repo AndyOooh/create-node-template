@@ -3,7 +3,7 @@
   "description": "Create node.js/express boilerplate with one command",
   "author": "AndyOooh",
   "version": "1.1.23",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -26,8 +26,9 @@
   ],
   "scripts": {
     "build": "tsc && resolve-tspaths",
+    "copy-templates": "cp -r templates dist/",
     "dev": "tsx watch src/index.ts",
-    "pub:patch": "yarn build && npm version patch && npm publish",
+    "pub:patch": "yarn build && copy-templates && npm version patch && npm publish",
     "start": "tsx dist/index.js"
   },
   "devDependencies": {

@@ -18,11 +18,10 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".", // neccessary for paths to work
-    "rootDir": "src",
     "paths": {
       "@config/*": ["src/config/*"],
       "@utils/*": ["src/utils/*"],
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src"]
 }
