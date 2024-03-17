@@ -8,7 +8,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AndyOooh/first-npx"
+    "url": "git+https://github.com/AndyOooh/first-npx.git"
+  },
+  "bin": {
+    "first-npx": "dist/index.js"
   },
   "files": [
     "dist/",
@@ -21,9 +24,6 @@
     "generator",
     "template"
   ],
-  "bin": {
-    "first-npx": "./dist/index.js"
-  },
   "scripts": {
     "build": "tsc && resolve-tspaths",
     "dev": "tsx watch src/index.ts",
