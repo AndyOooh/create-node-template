@@ -27,6 +27,7 @@
   "scripts": {
     "build": "tsc && resolve-tspaths",
     "dev": "tsx watch src/index.ts",
+    "pub:patch": "yarn build && npm version patch && npm publish",
     "start": "tsx dist/index.js"
   },
   "devDependencies": {
