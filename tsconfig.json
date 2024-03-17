@@ -18,6 +18,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".", // neccessary for paths to work
+    "rootDir": ".",
     "paths": {
       "@config/*": ["src/config/*"],
       "@utils/*": ["src/utils/*"],
