@@ -5,12 +5,13 @@ import { getPackageManager, getProjectName, getTemplate } from './utils';
 export const runWithNode = async () => {
   const __dirname = import.meta.dirname;
   const templatesPath = path.resolve(__dirname, '../../templates');
+  const [arg1, arg2, arg3] = process.argv.slice(2);
   // const contents = await fs.readdir(templatesPath); // just testing
 
   /* Get inputs (if not set in args) */
-  const projectName = await getProjectName(process.argv[2]);
-  const packageManager = await getPackageManager(process.argv[3]);
-  const template = await getTemplate(process.argv[4]);
+  const projectName = await getProjectName(arg1);
+  const packageManager = await getPackageManager(arg2);
+  const template = await getTemplate(arg3);
 
   console.log('🚀  projectName:', projectName);
   console.log('🚀  packageManager:', packageManager);
