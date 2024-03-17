@@ -22,7 +22,7 @@
     "template"
   ],
   "bin": {
-    "first-npx": "tsx ./dist/index.js"
+    "first-npx": "npm i tsx && tsx ./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
