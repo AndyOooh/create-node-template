@@ -22,6 +22,7 @@
     "paths": {
       "@config/*": ["src/config/*"],
       "@utils/*": ["src/utils/*"],
+      "@runners/*": ["src/runners/*"]
     }
   },
   "include": ["src"]

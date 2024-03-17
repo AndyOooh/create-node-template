@@ -1,10 +1,8 @@
 import * as util from 'util';
 import * as readline from 'node:readline/promises';
 import { exec } from 'node:child_process';
-import chalk from 'chalk';
-import { PackageManager, supportedPMs, Template, supportedTemplates } from '@config/index';
+import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index';
 
-export const { red, blue, cyan, green, yellow, bgRed, underline, magenta, magentaBright } = chalk;
 
 /*
  * Execute command asynchronusly

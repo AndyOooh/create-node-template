@@ -12,6 +12,7 @@ export const runWithNode = async () => {
   const projectName = await getProjectName(arg1);
   const packageManager = await getPackageManager(arg2);
   const template = await getTemplate(arg3);
+  // TODO: Let user pick PM and template frpm numbers instead of typing it out.
 
   console.log('🚀  projectName:', projectName);
   console.log('🚀  packageManager:', packageManager);

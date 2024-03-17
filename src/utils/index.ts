@@ -1,3 +1,3 @@
-export const addTwo = (num: number) => {
-  return num + 2;
-};
+import chalk from 'chalk';
+
+export const { red, blue, cyan, green, yellow, bgRed, underline, magenta, magentaBright } = chalk;

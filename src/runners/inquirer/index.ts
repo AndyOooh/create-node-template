@@ -1,9 +1,5 @@
 import inquirer from 'inquirer';
 import { listInquiry } from './examples/list';
-import { addTwo } from '@utils/index';
-
-
-const twoPlustwo = addTwo(2);
 
 export const runWithInquirer = async () => {
   // Select package manager
