@@ -4,12 +4,11 @@ import { runWithCommander } from './commander/intex.js';
 import { runWithInquirer } from './inquirer/index.js';
 import { runWithNode } from './vanilla-node/inde.js';
 
-console.log('🤡🧪 Helloooo World!');
-
 /**
  * ??
  */
 const run = async () => {
+  console.log(`🧪 Running script with: ${runner}`);
   switch (runner) {
     case 'inquirer':
       runWithInquirer();
