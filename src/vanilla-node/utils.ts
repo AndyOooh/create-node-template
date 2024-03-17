@@ -1,13 +1,14 @@
 import * as util from 'util';
 import * as readline from 'node:readline/promises';
+import { exec } from 'node:child_process';
 
 /*
  * Execute command asynchronusly
  */
-const exec = util.promisify(require('child_process').exec);
+const execPromise = util.promisify(exec);
 export const runCmd = async (command: string): Promise<void> => {
   try {
-    const { stdout, stderr } = await exec(command);
+    const { stdout, stderr } = await execPromise(command);
     console.log(stdout);
     console.log(stderr);
   } catch (error) {

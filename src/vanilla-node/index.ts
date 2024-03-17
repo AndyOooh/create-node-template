@@ -1,11 +1,17 @@
 import * as path from 'path';
+import * as fs from 'node:fs/promises';
 // import * as util from 'util';
-// import * as fs from 'fs';
 // import { execSync } from 'child_process';
+
+// Use import.meta.url to get the current file's URL
 
 import { readlinePromise, runCmd } from './utils';
 
-const templatesPath = path.join(__dirname, 'templates');
+// const templatesPath = path.join(__dirname, 'templates');
+
+const __dirname = import.meta.dirname;
+const templatesPath = path.resolve(__dirname, '../../templates');
+const contents = await fs.readdir(templatesPath);
 
 export const runWithNode = async () => {
   let projectName = process.argv[2];

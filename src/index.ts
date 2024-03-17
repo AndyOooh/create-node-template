@@ -1,6 +1,6 @@
 #! /usr/bin/env tsx
 
-// import { runWithCommander } from './commander';
+import { runWithCommander } from './commander';
 import { runner } from './config';
 import { runWithInquirer } from './inquirer';
 import { runWithNode } from './vanilla-node';
@@ -15,7 +15,7 @@ const run = async () => {
       runWithInquirer();
       break;
     case 'commander':
-      // runWithCommander();
+      runWithCommander();
       break;
     default:
       runWithNode();
