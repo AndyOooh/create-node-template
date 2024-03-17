@@ -25,13 +25,14 @@
     "first-npx": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && resolve-tspaths",
     "dev": "tsx watch src/index.ts",
     "start": "tsx dist/index.js"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.11.27",
+    "resolve-tspaths": "^0.8.18",
     "typescript": "^5.4.2"
   },
   "dependencies": {
