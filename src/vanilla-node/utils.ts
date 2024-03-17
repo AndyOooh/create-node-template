@@ -1,4 +1,5 @@
 import * as util from 'util';
+import * as readline from 'node:readline/promises';
 
 /*
  * Execute command asynchronusly
@@ -13,3 +14,8 @@ export const runCmd = async (command: string): Promise<void> => {
     console.log(error);
   }
 };
+
+export const readlinePromise = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
