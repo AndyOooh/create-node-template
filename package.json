@@ -26,8 +26,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsx watch src/server.ts",
-    "start": "tsx dist/server.js"
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx dist/index.js"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.7",

@@ -21,12 +21,6 @@
     "rootDir": "src",
     "paths": {
       "@config/*": ["src/config/*"],
-      "@routes/*": ["src/api/routes/*"],
-      "@controllers/*": ["src/controllers/*"],
-      "@models/*": ["src/models/*"],
-      "@services/*": ["src/services/*"],
-      "@loaders/*": ["src/loaders/*"],
-      "@middleware/*": ["src/middleware/*"]
     }
   },
   "include": ["src/**/*"]
