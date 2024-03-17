@@ -1,8 +1,9 @@
 #! /usr/bin/env node
-import { runner } from './config/index.js';
-import { runWithCommander } from './commander/intex.js';
-import { runWithInquirer } from './inquirer/index.js';
-import { runWithNode } from './vanilla-node/inde.js';
+
+import { runWithCommander } from './commander';
+import { runner } from './config';
+import { runWithInquirer } from './inquirer';
+import { runWithNode } from './vanilla-node';
 
 /**
  * ??
