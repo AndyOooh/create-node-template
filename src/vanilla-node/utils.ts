@@ -75,7 +75,7 @@ export const getTemplate = async (name: string): Promise<Template> => {
   let template = name as Template;
   while (!template || !supportedTemplates.includes(template)) {
     const input = await readlinePromise.question(
-      `Choose a template from thiis list:\n${supportedTemplates
+      `Choose a template from this list:\n${supportedTemplates
         .map(pm => `- ${pm}`)
         .join('\n')}\n press enter for node-basic: `
     );
