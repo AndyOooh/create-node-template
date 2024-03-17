@@ -1,42 +1,18 @@
 import * as path from 'path';
 import * as fs from 'node:fs/promises';
-// import * as util from 'util';
-// import { execSync } from 'child_process';
-import { findPackageManagers, readlinePromise, runCmd } from './utils';
-import { supportedPMs } from '@config/index';
-
-const __dirname = import.meta.dirname;
-const templatesPath = path.resolve(__dirname, '../../templates');
-const contents = await fs.readdir(templatesPath);
+import { getPackageManager, getProjectName, getTemplate } from './utils';
 
 export const runWithNode = async () => {
-  let projectName = process.argv[2];
-  // while (!projectName || projectName?.length < 3) {
-  //   projectName = await readlinePromise.question('Enter project name: ');
-  //   console.log('🚀  projectName:', projectName);
-  //   if (projectName?.length < 3) console.log('Project name should be more than 2 characters');
-  // }
-  // Prompt to choose package manager. Npm should be default. Other choices: yarn, pnpm, bun
-  let packageManager = process.argv[3];
-  while (!packageManager || !supportedPMs.includes(packageManager)) {
-    const packageManagers = await findPackageManagers();
-    console.log('🚀  packageManagers:', packageManagers);
-    packageManager = await readlinePromise.question(
-      `These package managers have been detected on your system:\n${packageManagers
-        .map(pm => `- ${pm}`)
-        .join('\n')}\nChoose one (press enter for npm): `
-    );
+  const __dirname = import.meta.dirname;
+  const templatesPath = path.resolve(__dirname, '../../templates');
+  // const contents = await fs.readdir(templatesPath); // just testing
 
-    if (packageManager === '') packageManager = 'npm';
-    if (!packageManager || !supportedPMs.includes(packageManager)) {
-      console.log('Invalid package manager');
-    }
-  }
-  // let packageManager = process.argv[3] || 'yarn'
-  // while (!['npm', 'yarn', 'pnpm', 'bun'].includes(packageManager)) {
-  //   packageManager = await readlinePromise.question('Choose package manager (npm, yarn, pnpm, bun): ');
-  //   if (!['npm', 'yarn', 'pnpm', 'bun'].includes(packageManager)) console.log('Invalid package manager');
-  // }
+  /* Get inputs (if not set in args) */
+  const projectName = await getProjectName(process.argv[2]);
+  const packageManager = getPackageManager(process.argv[3]);
+  const template = getTemplate(process.argv[4]);
+
+
 
   console.log('🚀  packageManager:', packageManager);
   console.log('🚀  projectName:', projectName);
