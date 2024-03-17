@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import { listInquiry } from './examples/list.js';
+import { listInquiry } from './examples/list';
 
 export const runWithInquirer = async () => {
   const questions = listInquiry;
