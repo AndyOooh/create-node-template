@@ -11,7 +11,7 @@
     "url": "git+https://github.com/AndyOooh/first-npx.git"
   },
   "bin": {
-    "first-npx": "dist/index.js"
+    "first-npx": "dist/src/index.js"
   },
   "files": [
     "dist/",
