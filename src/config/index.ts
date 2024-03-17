@@ -1,1 +1,2 @@
-export const runner: 'node' | 'inquirer' | 'commander' = 'inquirer';
+export const runner: 'node' | 'inquirer' | 'commander' = 'node';
+export const supportedPMs = ['npm', 'yarn', 'pnpm', 'bun'];
