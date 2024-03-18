@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as fs from 'node:fs/promises';
 import { getPackageManager, getProjectName, getTemplate, installCommandMap, runCmd } from './utils';
+import { cyan, green } from '@utils/index';
 
 // TODO: Let user pick PM and template frpm numbers instead of typing it out.
 
@@ -28,12 +29,13 @@ export const runWithNode = async () => {
 
     /* Install deps */
     const instalCommand = installCommandMap[packageManager];
-    console.log(`Installing deps with ${packageManager}...`);
-    await runCmd(`cd ${projectName} && ${instalCommand}`);
 
-    console.log('🚀  projectName:', projectName);
-    console.log('🚀  packageManager:', packageManager);
-    console.log('🚀  template:', template);
+    console.log(`\nUsing ${green(packageManager)}`);
+    console.log(`Installing dependencies...\n`);
+    await runCmd(`cd ${projectName} && ${instalCommand}`);
+    console.log('\nDependencies installed successfully.');
+
+    console.log(`\n${green('Success!')} Created project ${cyan(projectName)} at ${destPath}`);
   } catch (error) {
     console.log('🚫 Something went wrong, error: ', error);
   }

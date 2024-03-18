@@ -3,6 +3,7 @@ import * as readline from 'node:readline/promises';
 import * as fs from 'node:fs/promises';
 import { exec } from 'node:child_process';
 import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index';
+import { blue, yellow } from '@utils/index';
 
 /*
  * Execute command asynchronusly
@@ -69,13 +70,17 @@ export const getProjectName = async (
   let projectName = name;
   if (!projectName) {
     projectName = await readlinePromise.question(
-      `\nYou have not specified a project name.\nPress Enter to create a project in your current folder (${currFolder})\nor enter project name: `
+      `\nYou have not specified a project name.\nPress Enter to create a project in your current folder (${currFolder})\nOr enter a project ${blue(
+        'name'
+      )}: `
     );
   }
   const foldersInCwd = await fs.readdir(cwd);
   if (foldersInCwd.includes(projectName)) {
     const res = await readlinePromise.question(
-      `\nA folder with that name already exists.\nPress Enter to overwrite\nor enter a new project name: `
+      `\nA folder with that name already exists.\nPress Enter to overwrite\nOr enter a new project ${blue(
+        'name'
+      )}: `
     );
     projectName = res || projectName;
   }
@@ -91,7 +96,7 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
     const packageManagers: PackageManager[] = await findPackageManagers();
     // console.log('🚀  packageManagers:', packageManagers);
     const input = await readlinePromise.question(
-      `These package managers have been detected on your system:\n${packageManagers
+      `\nThese package managers have been detected on your system:\n${packageManagers
         .map(pm => `- ${pm}`)
         .join('\n')}\nChoose one (press enter for npm): `
     );
@@ -110,7 +115,7 @@ export const getTemplate = async (name: string): Promise<Template> => {
   let template = name as Template;
   while (!template || !supportedTemplates.includes(template)) {
     const input = await readlinePromise.question(
-      `Choose a template from this list:\n${supportedTemplates
+      `\nChoose a template from this list:\n${supportedTemplates
         .map(pm => `- ${pm}`)
         .join('\n')}\n press enter for node-basic: `
     );
@@ -119,5 +124,6 @@ export const getTemplate = async (name: string): Promise<Template> => {
       console.log('Invalid template name');
     }
   }
+  console.log(`\nCreating project with template: ${yellow(template)} \n`);
   return template;
 };
