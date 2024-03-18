@@ -10,8 +10,9 @@ import { underline } from './utils';
  * ??
  */
 const run = async () => {
-  console.log(`Running script with: ${underline.green(runner)}🧪`);
   try {
+    console.log(`Running script with: ${underline.green(runner)}🧪`);
+    
     switch (runner) {
       case 'inquirer':
         await runWithInquirer();

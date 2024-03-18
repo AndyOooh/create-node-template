@@ -1,8 +1,8 @@
 import * as util from 'util';
 import * as readline from 'node:readline/promises';
+import * as fs from 'node:fs/promises';
 import { exec } from 'node:child_process';
 import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index';
-
 
 /*
  * Execute command asynchronusly
@@ -41,12 +41,19 @@ export async function findPackageManagers(): Promise<PackageManager[]> {
 /*
  * Used with process.argv[2] to get project name
  */
-export const getProjectName = async (name?: string): Promise<string> => {
+export const getProjectName = async (cwd: string, currFolder: string, name?: string): Promise<string> => {
   let projectName = name;
-  while (!projectName || projectName?.length < 3) {
-    projectName = await readlinePromise.question('Enter project name: ');
-    console.log('🚀  projectName:', projectName);
-    if (projectName?.length < 3) console.log('Project name should be more than 2 characters');
+  if (!projectName) {
+    projectName = await readlinePromise.question(
+      `\nYou have not specified a project name.\nPress Enter to create a project in your current folder (${currFolder})\nor enter project name: `
+    );
+  }
+  const foldersInCwd = await fs.readdir(cwd);
+  if (foldersInCwd.includes(projectName)) {
+    const res = await readlinePromise.question(
+      `\nA folder with that name already exists.\nPress Enter to overwrite\nor enter a new project name: `
+    );
+    projectName = res || projectName;
   }
   return projectName;
 };
