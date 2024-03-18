@@ -9,7 +9,7 @@ export const runWithNode = async () => {
   const cwd = process.cwd(); // path to current working directory (shell. not including the source code file path)
   const currFolder = path.basename(cwd);
 
-  const templatesPath = path.resolve(__dirname, '../../templates');
+  const templatesPath = path.resolve(__dirname, '../../../templates');
   const [arg1, arg2, arg3] = process.argv.slice(2);
   // const contents = await fs.readdir(templatesPath); // just testing
 
@@ -22,8 +22,9 @@ export const runWithNode = async () => {
   const templatePath = path.join(templatesPath, template);
   /* copy template folder to dest */
 
-  // await fs.mkdir(destPath);
-  // await fs.copyFile(templatePath, destPath);
+  await fs.mkdir(destPath);
+  await fs.copyFile(templatePath, destPath);
+  fs.cp(templatePath, destPath, { recursive: true });
 
   console.log('🚀  projectName:', projectName);
   console.log('🚀  packageManager:', packageManager);
