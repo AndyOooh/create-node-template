@@ -8,6 +8,10 @@ import { PackageManager, Template, supportedPMs, supportedTemplates } from '@con
  * Execute command asynchronusly
  */
 const execPromise = util.promisify(exec);
+
+/*
+ *
+ */
 export const runCmd = async (command: string): Promise<void> => {
   try {
     const { stdout, stderr } = await execPromise(command);
@@ -18,11 +22,17 @@ export const runCmd = async (command: string): Promise<void> => {
   }
 };
 
+/*
+ *
+ */
 export const readlinePromise = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
+/*
+ *
+ */
 export async function findPackageManagers(): Promise<PackageManager[]> {
   const packageManagers: PackageManager[] = [];
 
@@ -41,7 +51,11 @@ export async function findPackageManagers(): Promise<PackageManager[]> {
 /*
  * Used with process.argv[2] to get project name
  */
-export const getProjectName = async (cwd: string, currFolder: string, name?: string): Promise<string> => {
+export const getProjectName = async (
+  cwd: string,
+  currFolder: string,
+  name?: string
+): Promise<string> => {
   let projectName = name;
   if (!projectName) {
     projectName = await readlinePromise.question(
@@ -58,6 +72,9 @@ export const getProjectName = async (cwd: string, currFolder: string, name?: str
   return projectName;
 };
 
+/*
+ *
+ */
 export const getPackageManager = async (name?: string): Promise<PackageManager> => {
   let packageManager = name as PackageManager;
   while (!packageManager || !supportedPMs.includes(packageManager)) {
@@ -76,6 +93,9 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
   return packageManager;
 };
 
+/*
+ *
+ */
 export const getTemplate = async (name: string): Promise<Template> => {
   let template = name as Template;
   while (!template || !supportedTemplates.includes(template)) {
@@ -86,7 +106,7 @@ export const getTemplate = async (name: string): Promise<Template> => {
     );
     template = (input as Template) || 'node-basic';
     if (!template || !supportedTemplates.includes(template)) {
-      console.log('Invalid package manager');
+      console.log('Invalid template name');
     }
   }
   return template;
