@@ -49,6 +49,16 @@ export async function findPackageManagers(): Promise<PackageManager[]> {
 }
 
 /*
+ * Used to map package managers to their install commands
+ */
+export const installCommandMap = {
+  npm: 'npm install',
+  yarn: 'yarn',
+  pnpm: 'pnpm install',
+  bun: 'bun install',
+};
+
+/*
  * Used with process.argv[2] to get project name
  */
 export const getProjectName = async (
