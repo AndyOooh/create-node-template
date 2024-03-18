@@ -17,6 +17,7 @@ export const runWithNode = async () => {
   console.log('🚀  projectName:', projectName);
   console.log('🚀  packageManager:', packageManager);
   console.log('🚀  template:', template);
+  
 };
 
 // Prompt to choose project type. Default is node basic. Other choices: node advanced, express, express advanced.
