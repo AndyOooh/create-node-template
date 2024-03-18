@@ -22,9 +22,13 @@ export const runWithNode = async () => {
   const templatePath = path.join(templatesPath, template);
   /* copy template folder to dest */
 
-  await fs.mkdir(destPath);
-  await fs.copyFile(templatePath, destPath);
-  fs.cp(templatePath, destPath, { recursive: true });
+  // await fs.mkdir(destPath);
+  // await fs.copyFile(templatePath, destPath);
+  try {
+    await fs.cp(templatePath, destPath, { recursive: true });
+  } catch (error) {
+    console.log('🚀  error:', error);
+  }
 
   console.log('🚀  projectName:', projectName);
   console.log('🚀  packageManager:', packageManager);
