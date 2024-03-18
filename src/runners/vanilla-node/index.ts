@@ -35,7 +35,7 @@ export const runWithNode = async () => {
     await runCmd(`cd ${projectName} && ${instalCommand}`);
     console.log('\nDependencies installed successfully.');
 
-    console.log(`\n${green('Success!')} Created project ${cyan(projectName)} at ${destPath}`);
+    console.log(`\n${green('Success!')} Created project ${cyan(projectName)} at ${destPath}\n\n\n`);
   } catch (error) {
     console.log('🚫 Something went wrong, error: ', error);
   }
