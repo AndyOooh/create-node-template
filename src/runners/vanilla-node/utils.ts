@@ -3,7 +3,7 @@ import * as readline from 'node:readline/promises';
 import * as fs from 'node:fs/promises';
 import { exec } from 'node:child_process';
 import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index';
-import { blue, yellow } from '@utils/index';
+import { blue, underline, yellow } from '@utils/index';
 
 /*
  * Execute command asynchronusly
@@ -30,24 +30,6 @@ export const readlinePromise = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-
-/*
- *
- */
-export async function findPackageManagers(): Promise<PackageManager[]> {
-  const packageManagers: PackageManager[] = [];
-
-  await Promise.all(
-    supportedPMs.map(async pm => {
-      try {
-        await execPromise(pm + ' --version');
-        packageManagers.push(pm);
-      } catch {}
-    })
-  );
-
-  return packageManagers;
-}
 
 /*
  * Used to map package managers to their install commands
@@ -90,23 +72,45 @@ export const getProjectName = async (
 /*
  *
  */
+export async function findPackageManagers(): Promise<PackageManager[]> {
+  const packageManagers: PackageManager[] = [];
+
+  await Promise.all(
+    supportedPMs.map(async pm => {
+      try {
+        await execPromise(pm + ' --version');
+        packageManagers.push(pm);
+      } catch {}
+    })
+  );
+
+  return packageManagers;
+}
+
+/*
+ *
+ */
 export const getPackageManager = async (name?: string): Promise<PackageManager> => {
   let packageManager = name as PackageManager;
   while (!packageManager || !supportedPMs.includes(packageManager)) {
     const packageManagers: PackageManager[] = await findPackageManagers();
-    // console.log('🚀  packageManagers:', packageManagers);
     const input = await readlinePromise.question(
       `\nThese package managers have been detected on your system:\n${packageManagers
-        .map(pm => `- ${pm}`)
-        .join('\n')}\nChoose one (press enter for npm): `
+        .filter(pm => pm !== 'npm')
+        .map((pm, index) => `${index + 1} - ${pm}`)
+        .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for npm: `
     );
-    packageManager = (input as PackageManager) || 'npm';
-    if (!packageManager || !supportedPMs.includes(packageManager)) {
-      console.log('Invalid package manager');
+    // packageManager = input === '' ? 'npm' : (input as PackageManager) || null;
+    packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
+    if (!packageManager) {
+      // console.log('Invalid choice. You must choose a number. Try again.');
+      console.log(`\nInvalid choice. You must  choose a number. Try again.`);
     }
   }
   return packageManager;
 };
+
+getPackageManager();
 
 /*
  *
