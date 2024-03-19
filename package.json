@@ -20,9 +20,24 @@
   ],
   "keywords": [
     "node",
-    "express",
+    "node.js",
+    "boilerplate",
     "generator",
-    "template"
+    "express",
+    "rest",
+    "api",
+    "mongodb",
+    "mongoose",
+    "es6",
+    "es7",
+    "es8",
+    "es9",
+    "jest",
+    "docker",
+    "passport",
+    "joi",
+    "eslint",
+    "prettier"
   ],
   "scripts": {
     "build": "tsc && resolve-tspaths",
