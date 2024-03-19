@@ -141,20 +141,24 @@ export const renameProject = async (projectName: string, destPath: string) => {
   await fs.writeFile(packageJsonPath, newPackageJson);
 };
 
-export const getSuccessString = (projectName: string, destPath: string) => {
+export const getSuccessString = (projectName: string, template: string) => {
   const emoji = '🦉';
-  const chars = 35;
-  const extraChars = projectName.length + destPath.length;
+  const chars = 39;
+  const extraChars = projectName.length + template.length;
   const hashString = Array.from({ length: extraChars + chars })
     .map(el => '#')
     .join('');
 
   const successString = `
 ${cyan(hashString)}
-${emoji} ${green('Success!')} Created project ${yellow.bold(projectName)} at ${italic(
-    destPath
+${emoji} ${green('Success!')} Created a ${italic(template)} project, in ${yellow.bold(
+    projectName
   )} ${emoji}
 ${cyan(hashString)}
 `;
   return successString;
 };
+
+const projectName = 'my-new-project';
+const template = 'node-basic';
+console.log(getSuccessString(projectName, template));
