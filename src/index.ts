@@ -11,7 +11,7 @@ import { underline } from './utils';
  */
 const run = async () => {
   try {
-    console.log(`Running script with: ${underline.green(runner)}🧪`);
+    console.log(`\nRunning script with: ${underline.green(runner)}🧪...`);
     
     switch (runner) {
       case 'inquirer':

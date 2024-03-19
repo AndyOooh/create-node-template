@@ -99,7 +99,7 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
       `\nThese package managers have been detected on your system:\n${packageManagers
         .filter(pm => pm !== 'npm')
         .map((pm, index) => `${index + 1} - ${pm}`)
-        .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for npm: `
+        .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for ${blue('npm')}: `
     );
     packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
     if (!packageManager) {
@@ -120,7 +120,9 @@ export const getTemplate = async (name?: string): Promise<Template> => {
       `\nChoose a template from this list:\n${supportedTemplates
         .filter(temp => temp !== 'node-basic')
         .map((temp, index) => `${index + 1} - ${temp}`)
-        .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for node-basic: `
+        .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for ${blue(
+        'node-basic'
+      )}: `
     );
     template = input === '' ? 'node-basic' : (supportedTemplates[+input] as Template) || null;
     console.log('🚀  template:', template);

@@ -39,8 +39,8 @@ export const runWithNode = async () => {
     /* Install deps */
     const instalCommand = installCommandMap[packageManager];
 
-    console.log(`\nUsing ${green(packageManager)}`);
-    console.log(`Installing dependencies...\n`);
+    console.log(`Using ${green(packageManager)}`);
+    console.log(`Installing dependencies...`);
     await runCmd(`cd ${projectName} && ${instalCommand}`);
     console.log('\nDependencies installed successfully.');
 
