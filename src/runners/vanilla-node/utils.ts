@@ -157,6 +157,6 @@ ${cyan(hashString)}
 };
 
 /* Test */
-const projectName = 'my-new-project';
-const template = 'node-basic';
-console.log(getSuccessString(projectName, template));
+// const projectName = 'my-new-project';
+// const template = 'node-basic';
+// console.log(getSuccessString(projectName, template));
