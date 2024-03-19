@@ -11,8 +11,6 @@ import {
 } from './utils';
 import { cyan, green } from '@utils/index';
 
-// TODO: Let user pick PM and template frpm numbers instead of typing it out.
-
 export const runWithNode = async () => {
   try {
     const __dirname = import.meta.dirname; // path to current file (not iuncluding the file name)
@@ -21,7 +19,6 @@ export const runWithNode = async () => {
 
     const templatesPath = path.resolve(__dirname, '../../../templates');
     const [arg1, arg2, arg3] = process.argv.slice(2);
-    // const contents = await fs.readdir(templatesPath); // just testing
 
     /* Get inputs (if not set in args) */
     const projectName = await getProjectName(cwd, currFolder, arg1);
@@ -32,20 +29,23 @@ export const runWithNode = async () => {
     const destPath = projectName ? path.join(cwd, projectName) : cwd;
     const templatePath = path.join(templatesPath, template);
     await fs.cp(templatePath, destPath, { recursive: true });
-    await renameProject(projectName, destPath);
 
-    /* Create/modify package.json */
+    /* Modify package.json.name */
+    await renameProject(projectName, destPath);
 
     /* Install deps */
     const instalCommand = installCommandMap[packageManager];
-
     console.log(`Installing dependencies with ${green(packageManager)}...`);
     await runCmd(`cd ${projectName} && ${instalCommand}`);
-    // console.log('Dependencies installed successfully.');
     console.log(`Dependencies installed ${green('successfully')}.`);
 
     const succesString = getSuccessString(projectName, template);
     console.log(succesString);
+
+    console.log(`Recommended next steps:`);
+    console.log(`1. ${cyan(`cd ${projectName}`)}`);
+    console.log(`2. ${cyan('code .')} (VSCode)`);
+    console.log(`3. ${cyan(`tsx run dev`)}\n`);
   } catch (error) {
     console.log('🚫 Something went wrong, error: ', error);
   }
