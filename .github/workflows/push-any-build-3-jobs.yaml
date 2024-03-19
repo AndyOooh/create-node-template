@@ -13,11 +13,6 @@ on:
 
 env:
   # To use Remote Caching, uncomment the next lines and follow the steps below.
-  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-  TURBO_REMOTE_ONLY: true
-  NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-  NEXT_PUBLIC_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_MAPS_API_KEY }}
 
 jobs:
   checkout_install_lint:
@@ -44,13 +39,10 @@ jobs:
           # Adding node version as cache key
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
 
-      - name: Install TurboRepo CLI
-        run: yarn global add turbo
       - name: Install dependencies
         run: yarn
       - name: Lint
-        # run: turbo run lint --filter="...[HEAD^1]"
-        run: turbo run lint
+        run: yarn lint
 
   build:
     runs-on: ubuntu-latest
@@ -72,40 +64,30 @@ jobs:
             **/node_modules
           # Adding node version as cache key
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
-      - name: Install TurboRepo CLI
-        run: yarn global add turbo
       - name: Build
         run: |
-          # yarn workspaces foreach --verbose --since --no-private info
-          # yarn workspaces info
-          # yarn workspaces foreach install
-          # turbo run build --filter="...[HEAD^1]"
-          turbo run build
-          
-  test:
-    runs-on: ubuntu-latest
-    needs: checkout_install_lint
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-        with:
-          fetch-depth: 2
-      - name: Install Node.js v20.10
-        uses: actions/setup-node@v4.0.1
-        with:
-          node-version: '20.10'
-      - name: Get node_modules cache
-        uses: actions/cache@v4.0.0
-        # id: node_modules
-        with:
-          path: |
-            **/node_modules
-          # Adding node version as cache key
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
-      - name: Install TurboRepo CLI
-        run: yarn global add turbo
-      - name: Test
-        run: |
-          # turbo run test --filter=...[origin/main]
-          # turbo run test
-          turbo run lint
+          yarn build
+
+  # test:
+  #   runs-on: ubuntu-latest
+  #   needs: checkout_install_lint
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4.1.1
+  #       with:
+  #         fetch-depth: 2
+  #     - name: Install Node.js v20.10
+  #       uses: actions/setup-node@v4.0.1
+  #       with:
+  #         node-version: '20.10'
+  #     - name: Get node_modules cache
+  #       uses: actions/cache@v4.0.0
+  #       # id: node_modules
+  #       with:
+  #         path: |
+  #           **/node_modules
+  #         # Adding node version as cache key
+  #         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
+  #     - name: Test
+  #       run: |
+  #         yarn test
