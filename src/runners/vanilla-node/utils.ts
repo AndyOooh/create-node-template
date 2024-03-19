@@ -1,9 +1,10 @@
 import * as util from 'util';
 import * as readline from 'node:readline/promises';
 import * as fs from 'node:fs/promises';
+import path from 'path';
 import { exec } from 'node:child_process';
 import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index';
-import { blue, underline, yellow } from '@utils/index';
+import { blue, cyan, green, italic, magenta, red, underline, yellow } from '@utils/index';
 
 /*
  * Execute command asynchronusly
@@ -109,8 +110,6 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
   return packageManager;
 };
 
-// getPackageManager();
-
 /*
  *
  */
@@ -132,3 +131,33 @@ export const getTemplate = async (name?: string): Promise<Template> => {
   console.log(`\nCreating project with template: ${yellow(template)} \n`);
   return template;
 };
+
+export const renameProject = async (projectName: string, destPath: string) => {
+  const packageJsonPath = path.join(destPath, 'package.json');
+  const packageJson = await fs.readFile(packageJsonPath, 'utf-8');
+  const newPackageJson = packageJson.replace(/"name": ".*"/, `"name": "${projectName}"`);
+  await fs.writeFile(packageJsonPath, newPackageJson);
+};
+
+export const getSuccessString = (projectName: string, destPath: string) => {
+  const emoji = '🦉';
+  const chars = 35;
+  const extraChars = projectName.length + destPath.length;
+  const hashString = Array.from({ length: extraChars + chars })
+    .map(el => '#')
+    .join('');
+
+  const successString = `
+${cyan(hashString)}
+${emoji} ${green('Success!')} Created project ${yellow.bold(projectName)} at ${italic(
+    destPath
+  )} ${emoji}
+${cyan(hashString)}
+`;
+  return successString;
+};
+
+/* Test */
+const projectName = 'test';
+const destPath = '/Users/username/Projects/test';
+console.log(getSuccessString(projectName, destPath));
