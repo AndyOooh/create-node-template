@@ -100,31 +100,32 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
         .map((pm, index) => `${index + 1} - ${pm}`)
         .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for npm: `
     );
-    // packageManager = input === '' ? 'npm' : (input as PackageManager) || null;
     packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
     if (!packageManager) {
-      // console.log('Invalid choice. You must choose a number. Try again.');
       console.log(`\nInvalid choice. You must  choose a number. Try again.`);
     }
   }
+  console.log(`\nYou have chosen: ${yellow(packageManager)} \n`);
   return packageManager;
 };
 
-getPackageManager();
+// getPackageManager();
 
 /*
  *
  */
-export const getTemplate = async (name: string): Promise<Template> => {
+export const getTemplate = async (name?: string): Promise<Template> => {
   let template = name as Template;
   while (!template || !supportedTemplates.includes(template)) {
     const input = await readlinePromise.question(
       `\nChoose a template from this list:\n${supportedTemplates
-        .map(pm => `- ${pm}`)
-        .join('\n')}\n press enter for node-basic: `
+        .filter(temp => temp !== 'node-basic')
+        .map((temp, index) => `${index + 1} - ${temp}`)
+        .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for node-basic: `
     );
-    template = (input as Template) || 'node-basic';
-    if (!template || !supportedTemplates.includes(template)) {
+    template = input === '' ? 'node-basic' : (supportedTemplates[+input] as Template) || null;
+    console.log('🚀  template:', template);
+    if (!template) {
       console.log('Invalid template name');
     }
   }
