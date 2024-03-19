@@ -125,7 +125,6 @@ export const getTemplate = async (name?: string): Promise<Template> => {
       )}: `
     );
     template = input === '' ? 'node-basic' : (supportedTemplates[+input] as Template) || null;
-    console.log('🚀  template:', template);
     if (!template) {
       console.log('Invalid template name');
     }
@@ -159,6 +158,7 @@ ${cyan(hashString)}
   return successString;
 };
 
-const projectName = 'my-new-project';
-const template = 'node-basic';
-console.log(getSuccessString(projectName, template));
+/* Test */
+// const projectName = 'my-new-project';
+// const template = 'node-basic';
+// console.log(getSuccessString(projectName, template));
