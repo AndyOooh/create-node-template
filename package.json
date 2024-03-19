@@ -2,7 +2,7 @@
   "name": "create-node-template",
   "description": "Create node.js/express boilerplate with one command",
   "author": "AndyOooh",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "src/index.js",
   "type": "module",
   "license": "MIT",
