@@ -133,6 +133,9 @@ export const getTemplate = async (name?: string): Promise<Template> => {
   return template;
 };
 
+/*
+ *
+ */
 export const renameProject = async (projectName: string, destPath: string) => {
   const packageJsonPath = path.join(destPath, 'package.json');
   const packageJson = await fs.readFile(packageJsonPath, 'utf-8');
@@ -140,6 +143,9 @@ export const renameProject = async (projectName: string, destPath: string) => {
   await fs.writeFile(packageJsonPath, newPackageJson);
 };
 
+/*
+ *
+ */
 export const getSuccessString = (projectName: string, template: string) => {
   const emoji = '🦉';
   const chars =53;

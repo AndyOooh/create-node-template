@@ -7,13 +7,15 @@ import { runner } from './config';
 import { underline } from './utils';
 
 /**
- * ??
+ * CLI entry point
+ * runMode decides which implementation to run
+ * Choices are: vanilla-node, inquirer, commander
  */
-const run = async () => {
+const run = async (runMode: string) => {
   try {
-    console.log(`\nRunning script with: ${underline.green(runner)}🧪...`);
-    
-    switch (runner) {
+    console.log(`\nRunning script with: ${underline.green(runMode)}🧪...`);
+
+    switch (runMode) {
       case 'inquirer':
         await runWithInquirer();
         break;
@@ -30,4 +32,4 @@ const run = async () => {
   }
 };
 
-run();
+run(runner);
