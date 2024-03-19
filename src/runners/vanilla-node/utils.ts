@@ -53,9 +53,11 @@ export const getProjectName = async (
   let projectName = name;
   if (!projectName) {
     projectName = await readlinePromise.question(
-      `\nYou have not specified a project name.\nPress Enter to create a project in your current folder (${currFolder})\nOr enter a project ${blue(
-        'name'
-      )}: `
+      `\nYou have not specified a project name.\n${underline(
+        'Press Enter'
+      )} to create a project in your current folder (${underline.bold(
+        currFolder
+      )})\nOr enter a ${blue('project name')}: `
     );
   }
   const foldersInCwd = await fs.readdir(cwd);
@@ -99,14 +101,14 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
       `\nThese package managers have been detected on your system:\n${packageManagers
         .filter(pm => pm !== 'npm')
         .map((pm, index) => `${index + 1} - ${pm}`)
-        .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for ${blue('npm')}: `
+        .join('\n')}\n\nSelect a ${underline('number')} or press Enter for ${blue('npm')}: `
     );
     packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
     if (!packageManager) {
-      console.log(`\nInvalid choice. You must  choose a number. Try again.`);
+      console.log(`\nInvalid selection. You must input a number. Try again.`);
     }
   }
-  console.log(`\nYou have chosen: ${yellow(packageManager)} \n`);
+  console.log(`You have selected: ${yellow(packageManager)} \n`);
   return packageManager;
 };
 
@@ -117,19 +119,17 @@ export const getTemplate = async (name?: string): Promise<Template> => {
   let template = name as Template;
   while (!template || !supportedTemplates.includes(template)) {
     const input = await readlinePromise.question(
-      `\nChoose a template from this list:\n${supportedTemplates
+      `\nSelect a template from this list (${underline('input number')}):\n${supportedTemplates
         .filter(temp => temp !== 'node-basic')
         .map((temp, index) => `${index + 1} - ${temp}`)
-        .join('\n')}\n\nChoose one ${underline('by number')} or press Enter for ${blue(
-        'node-basic'
-      )}: `
+        .join('\n')}\n\nOr press Enter for ${blue('node-basic')}: `
     );
     template = input === '' ? 'node-basic' : (supportedTemplates[+input] as Template) || null;
     if (!template) {
       console.log('Invalid template name');
     }
   }
-  console.log(`\nCreating project with template: ${yellow(template)} \n`);
+  console.log(`Creating project with template: ${yellow(template)} \n`);
   return template;
 };
 
@@ -142,7 +142,7 @@ export const renameProject = async (projectName: string, destPath: string) => {
 
 export const getSuccessString = (projectName: string, template: string) => {
   const emoji = '🦉';
-  const chars = 39;
+  const chars =53;
   const extraChars = projectName.length + template.length;
   const hashString = Array.from({ length: extraChars + chars })
     .map(el => '#')
@@ -150,15 +150,13 @@ export const getSuccessString = (projectName: string, template: string) => {
 
   const successString = `
 ${cyan(hashString)}
-${emoji} ${green('Success!')} Created a ${italic(template)} project, in ${yellow.bold(
-    projectName
-  )} ${emoji}
+${emoji} ${green('Success!')} Created new project ${yellow.bold(projectName)} using template: ${yellow.italic(template)} ${emoji}
 ${cyan(hashString)}
 `;
   return successString;
 };
 
 /* Test */
-// const projectName = 'my-new-project';
-// const template = 'node-basic';
-// console.log(getSuccessString(projectName, template));
+const projectName = 'my-new-project';
+const template = 'node-basic';
+console.log(getSuccessString(projectName, template));
