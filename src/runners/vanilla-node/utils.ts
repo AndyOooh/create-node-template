@@ -156,8 +156,3 @@ ${cyan(hashString)}
 `;
   return successString;
 };
-
-/* Test */
-const projectName = 'test';
-const destPath = '/Users/username/Projects/test';
-console.log(getSuccessString(projectName, destPath));
