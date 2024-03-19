@@ -1,0 +1,33 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+
+on: [push]
+jobs:
+  output-username-and-nod-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Install Node.js v18
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Install TurboRepo CLI
+        run: pnpm install turbo --global
+      - name: Check for workspace changes
+        run: turbo run build --filter="...[HEAD^1]" --dry-run=json
+        id: workspaces-changed
+      - name: Log WS with changes
+        run: |
+          echo "${{ steps.workspaces-changed.output.package }} ${{ steps.workspaces-changed.output.name }} ${{ steps.workspaces-changed.name }} ${{ steps.workspaces-changed.output.package }}"
+          # echo ${{ steps.check_changes.outputs.json }}
+
+      # - name: Deploy app changes
+      # run: echo "${{ steps.check_changes.outputs.dryrun }}"
+      # if: ${{ contains(env.diff, 'apps/app') }}
