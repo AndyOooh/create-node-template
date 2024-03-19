@@ -5,4 +5,8 @@
 
 ## Prerequisites
 
-- Node.js v 16.7.0 or higher (required by fs.cp)
+- Node.js v 16.7.0 or higher (required by fs.cp) (only in vanilla-node mode?)
+
+### Notes
+- Vanilla uses Experimental fs.cp
+
