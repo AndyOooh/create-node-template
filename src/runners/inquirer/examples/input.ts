@@ -1,10 +1,11 @@
 import chalk from 'chalk';
 
-const hexRegEx: RegExp = /([0-9]|[a-f])/gim;
+// const hexRegEx: RegExp = /([0-9]|[a-f])/gim;
+const hexRegEx = /([0-9]|[a-f])/gim;
 
 const isHex = (value: string): boolean => {
   return (
-    (value.match(hexRegEx) || []).length === value.length &&
+    (value.match(hexRegEx) ?? []).length === value.length &&
     (value.length === 3 || value.length === 6)
   );
 };

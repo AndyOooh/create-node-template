@@ -32,4 +32,4 @@ const run = async (runMode: string) => {
   }
 };
 
-run(runner);
+void run(runner);
