@@ -7,7 +7,9 @@
   "scripts": {
     "build": "tsc && resolve-tspaths",
     "dev": "tsx watch src/server.ts",
-    "dev:start": "tsx dist/server.js"
+    "dev:start": "tsx dist/server.js",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
