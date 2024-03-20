@@ -105,7 +105,6 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
         .map((pm, index) => `${index + 1} - ${pm}`)
         .join('\n')}\n\nSelect a ${underline('number')} or press Enter for ${blue('npm')}: `
     );
-    // packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
     packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
     if (!packageManager) {
       console.log(`\nInvalid selection. You must input a number. Try again.`);

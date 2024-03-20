@@ -11,7 +11,7 @@ export default tseslint.config(
   // ...tseslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   // ...tseslint.configs.strictTypeChecked,
-  // ...tseslint.configs.stylisticTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
 
   /* This block is required for type checked */
   {
