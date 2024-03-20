@@ -1,0 +1,33 @@
+/* https://www.npmjs.com/package/@tsconfig/node21 */
+
+{
+  "compilerOptions": {
+    /* Start: tsconfig recommended node 21 */
+    // "lib": ["es2023"],
+    "module": "ESNext",
+    "moduleResolution": "Node", // node16
+    "target": "ES2020",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    /* End: tsconfig recommended node 21 */
+
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".", // neccessary for paths to work
+    "rootDir": "src",
+    "paths": {
+      "@config/*": ["src/config/*"],
+      "@routes/*": ["src/api/routes/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@models/*": ["src/models/*"],
+      "@services/*": ["src/services/*"],
+      "@loaders/*": ["src/loaders/*"],
+      "@middleware/*": ["src/middleware/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
