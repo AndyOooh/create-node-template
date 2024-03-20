@@ -20,16 +20,36 @@
   ],
   "keywords": [
     "node",
+    "node.js",
+    "typescript",
     "express",
+    "boilerplate",
+    "template",
     "generator",
-    "template"
+    "project",
+    "setup",
+    "cli",
+    "rest",
+    "api",
+    "mongodb",
+    "mongoose",
+    "es6",
+    "jest",
+    "docker",
+    "passport",
+    "joi",
+    "eslint",
+    "prettier"
   ],
   "scripts": {
     "build": "tsc && resolve-tspaths",
     "copy-templates": "cp -r templates dist/",
     "dev": "tsx watch src/index.ts",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "publish:patch": "yarn build && yarn copy-templates && npm version patch && npm publish --registry=https://registry.npmjs.org/",
-    "start": "tsx dist/index.js"
+    "start": "tsx dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
