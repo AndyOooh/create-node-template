@@ -4,6 +4,9 @@ import { initLoaders } from './loaders';
 
 const { port } = configVars;
 
+const arr: Array<string> = ['sdasd'];
+const arr2: string[] = ['sdasd'];
+
 const startServer = async (): Promise<void> => {
   try {
     const app: Application = express();
