@@ -8,10 +8,10 @@ import tseslint from 'typescript-eslint';
 export default tseslint.config(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
   eslint.configs.recommended,
-  ...tseslint.configs.recommended,
+  // ...tseslint.configs.recommended,
   // ...tseslint.configs.recommendedTypeChecked,
-  // ...tseslint.configs.strictTypeChecked,
-  // ...tseslint.configs.stylisticTypeChecked,
+  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
 
   /* This block is required for type checked */
   {
@@ -23,13 +23,14 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['node_modules', 'dist', 'templates'],
-    // ignores: ['node_modules', 'dist'],
+    // ignores: ['node_modules', 'dist', 'templates'],
+    ignores: ['node_modules', 'dist'],
   },
   {
     rules: {
       '@typescript-eslint/no-unused-vars': 'warn',
       'no-useless-catch': 'warn',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     },
   }
 );

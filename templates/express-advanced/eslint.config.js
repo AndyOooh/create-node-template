@@ -23,7 +23,7 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['node_modules', 'dist', 'templates'],
+    ignores: ['node_modules', 'dist'],
   },
   {
     rules: {

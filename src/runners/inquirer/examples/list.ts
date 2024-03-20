@@ -26,7 +26,7 @@ export const listInquiry = [
     name: 'size',
     message: 'What size do you need?',
     choices: ['Jumbo', 'Large', 'Standard', 'Medium', 'Small', 'Micro'],
-    filter(val: unknown) {
+    filter(val: string) {
       return val.toLowerCase();
     },
   },

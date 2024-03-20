@@ -97,7 +97,7 @@ export async function findPackageManagers(): Promise<PackageManager[]> {
  */
 export const getPackageManager = async (name?: string): Promise<PackageManager> => {
   let packageManager = name as PackageManager;
-  while (!packageManager || !supportedPMs.includes(packageManager)) {
+  while (!supportedPMs.includes(packageManager)) {
     const packageManagers: PackageManager[] = await findPackageManagers();
     const input = await readlinePromise.question(
       `\nThese package managers have been detected on your system:\n${packageManagers
@@ -105,6 +105,7 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
         .map((pm, index) => `${index + 1} - ${pm}`)
         .join('\n')}\n\nSelect a ${underline('number')} or press Enter for ${blue('npm')}: `
     );
+    // packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
     packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
     if (!packageManager) {
       console.log(`\nInvalid selection. You must input a number. Try again.`);

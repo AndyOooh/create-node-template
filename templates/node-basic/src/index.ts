@@ -5,7 +5,4 @@ const run = async () => {
   console.log('Todo #1: ', todo);
 };
 
-run();
-
-Array(0, 1, 2);
-new Array(0, 1, 2);
+void run();
