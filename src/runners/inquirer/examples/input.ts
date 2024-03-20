@@ -25,7 +25,7 @@ export const inpuQuestions = [
     type: 'input',
     name: 'fav_color',
     message: "What's your favorite color",
-    transformer: (color: string, answers: Record<string, any>, flags: Record<string, any>) => {
+    transformer: (color: string, answers: Record<string, unknown>, flags: Record<string, any>) => {
       const text = chalk.hex(isHex(color) ? color : 'fff')(color);
       if (flags.isFinal) {
         return text + '!';

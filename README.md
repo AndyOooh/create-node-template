@@ -10,3 +10,8 @@
 ### Notes
 - Vanilla uses Experimental fs.cp
 
+
+
+## References
+### eslint
+https://typescript-eslint.io/rules/
