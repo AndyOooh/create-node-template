@@ -25,5 +25,5 @@
       "@runners/*": ["src/runners/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "eslint.config.js"]
 }

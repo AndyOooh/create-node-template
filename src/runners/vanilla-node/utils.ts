@@ -83,7 +83,9 @@ export async function findPackageManagers(): Promise<PackageManager[]> {
       try {
         await execPromise(pm + ' --version');
         packageManagers.push(pm);
-      } catch {}
+      } catch (error) {
+        throw error;
+      }
     })
   );
 
@@ -148,7 +150,7 @@ export const renameProject = async (projectName: string, destPath: string) => {
  */
 export const getSuccessString = (projectName: string, template: string) => {
   const emoji = '🦉';
-  const chars =53;
+  const chars = 53;
   const extraChars = projectName.length + template.length;
   const hashString = Array.from({ length: extraChars + chars })
     .map(el => '#')
@@ -156,7 +158,9 @@ export const getSuccessString = (projectName: string, template: string) => {
 
   const successString = `
 ${cyan(hashString)}
-${emoji} ${green('Success!')} Created new project ${yellow.bold(projectName)} using template: ${yellow.italic(template)} ${emoji}
+${emoji} ${green('Success!')} Created new project ${yellow.bold(
+    projectName
+  )} using template: ${yellow.italic(template)} ${emoji}
 ${cyan(hashString)}
 `;
   return successString;

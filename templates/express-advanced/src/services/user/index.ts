@@ -6,6 +6,7 @@ export const fetchUsers = async () => {
     /* Any other business logic, e.g. publish events, etc. */
     return posts.data;
   } catch (error) {
+    console.log('🚀  error:', error);
     throw error;
   }
 };
