@@ -30,7 +30,9 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/no-unused-vars': 'warn',
       'no-useless-catch': 'warn',
+      '@typescript-eslint/no-empty-function': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
     },
   }
 );
