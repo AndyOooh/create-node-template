@@ -4,10 +4,10 @@ import { initLoaders } from './loaders';
 
 const { port } = configVars;
 
-const startServer = async (): Promise<void> => {
+const startServer = () => {
   try {
     const app: Application = express();
-    await initLoaders(app);
+    initLoaders(app);
 
     app
       .listen(port, () => {
@@ -17,8 +17,10 @@ const startServer = async (): Promise<void> => {
         console.log('Error starting server: ', error.message);
       });
   } catch (error) {
+    // TODO error-handling
+    console.log('🚀  error:', error);
     throw error;
   }
 };
 
-void startServer();
+startServer();
