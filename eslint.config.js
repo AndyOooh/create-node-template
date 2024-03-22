@@ -24,7 +24,7 @@ export default tseslint.config(
   },
   {
     // ignores: ['node_modules', 'dist', 'templates'],
-    ignores: ['node_modules', 'dist'],
+    ignores: ['node_modules', 'dist', 'templates/node-basic', 'templates/express-basic'],
   },
   {
     rules: {
