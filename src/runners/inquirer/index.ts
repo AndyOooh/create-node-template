@@ -14,7 +14,7 @@ export const runWithInquirer = async () => {
 
   // const packManagers = packageManagers;
   // console.log('🚀  packManagers:', packManagers);
-  const questions = listInquiry;
-  const answers: Record<string, unknown> = await inquirer.prompt(questions);
-  console.log(JSON.stringify(answers, null, '  '));
+  // const questions = listInquiry;
+  // const answers: Record<string, unknown> = await inquirer.prompt(questions);
+  // console.log(JSON.stringify(answers, null, '  '));
 };
