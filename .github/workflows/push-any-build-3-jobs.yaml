@@ -6,9 +6,9 @@ name: Push to any - 3 Jobs
 run-name: Lint, Build, Test
 
 on:
-  # push:
-  #   branches-ignore:
-  #     - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 # env:
@@ -66,9 +66,13 @@ jobs:
             **/node_modules
           # Adding node version as cache key
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
+
+      - name: Install Bun
+        run: npm i -g bun
+        run: bun --version
       - name: Build
         run: |
-          bun build
+          bun build && cd templates/express-advanced && bun build
 
   # test:
   #   runs-on: ubuntu-latest
