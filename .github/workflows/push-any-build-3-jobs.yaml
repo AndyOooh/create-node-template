@@ -73,7 +73,7 @@ jobs:
         run: bun --version
       - name: Build
         run: |
-          bun build
+          bun build && cd templates/express-advanced && bun build
 
   # test:
   #   runs-on: ubuntu-latest
