@@ -37,7 +37,7 @@ jobs:
           path: |
             **/node_modules
           # Adding node version as cache key
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/bun.lockb') }}-${{ steps.node.outputs.version }}
 
       - name: Install Bun
         run: npm i -g bun
