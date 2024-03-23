@@ -15,3 +15,8 @@
 ## References
 ### eslint
 https://typescript-eslint.io/rules/
+
+### Express
+https://expressjs.com/
+### Express error-handling
+https://expressjs.com/en/guide/error-handling.html

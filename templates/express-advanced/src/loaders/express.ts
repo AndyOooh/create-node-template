@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import { apiRoutes } from '@routes/index';
+import { errorHandler } from 'src/api/middlewares/errorHandler';
 
 export const expressLoader = (app: Application) => {
   app.get('/status', (req, res) => {
@@ -8,7 +9,7 @@ export const expressLoader = (app: Application) => {
 
   app.use(express.json());
   app.use('/', apiRoutes);
-  //   app.use(errorHandler);
+  app.use(errorHandler);
 
   return app;
 };
