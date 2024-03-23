@@ -45,8 +45,8 @@
     "build": "tsc && resolve-tspaths",
     "copy-templates": "cp -r templates dist/",
     "dev": "tsx watch src/index.ts",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
     "publish:patch": "yarn build && yarn copy-templates && npm version patch && npm publish --registry=https://registry.npmjs.org/",
     "start": "tsx dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -54,8 +54,10 @@
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.11.27",
+    "eslint": "^8.57.0",
     "resolve-tspaths": "^0.8.18",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "typescript-eslint": "^7.3.1"
   },
   "dependencies": {
     "@inquirer/checkbox": "^2.2.0",

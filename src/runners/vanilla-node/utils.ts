@@ -77,16 +77,12 @@ export const getProjectName = async (
  */
 export async function findPackageManagers(): Promise<PackageManager[]> {
   const packageManagers: PackageManager[] = [];
-
   await Promise.all(
     supportedPMs.map(async pm => {
-      try {
-        await execPromise(pm + ' --version');
-        packageManagers.push(pm);
-      } catch {}
+      await execPromise(pm + ' --version');
+      packageManagers.push(pm);
     })
   );
-
   return packageManagers;
 }
 
@@ -95,7 +91,7 @@ export async function findPackageManagers(): Promise<PackageManager[]> {
  */
 export const getPackageManager = async (name?: string): Promise<PackageManager> => {
   let packageManager = name as PackageManager;
-  while (!packageManager || !supportedPMs.includes(packageManager)) {
+  while (!supportedPMs.includes(packageManager)) {
     const packageManagers: PackageManager[] = await findPackageManagers();
     const input = await readlinePromise.question(
       `\nThese package managers have been detected on your system:\n${packageManagers
@@ -103,7 +99,7 @@ export const getPackageManager = async (name?: string): Promise<PackageManager> 
         .map((pm, index) => `${index + 1} - ${pm}`)
         .join('\n')}\n\nSelect a ${underline('number')} or press Enter for ${blue('npm')}: `
     );
-    packageManager = input === '' ? 'npm' : (packageManagers[+input - 1] as PackageManager) || null;
+    packageManager = input === '' ? 'npm' : packageManagers[+input - 1] || null;
     if (!packageManager) {
       console.log(`\nInvalid selection. You must input a number. Try again.`);
     }
@@ -124,7 +120,7 @@ export const getTemplate = async (name?: string): Promise<Template> => {
         .map((temp, index) => `${index + 1} - ${temp}`)
         .join('\n')}\n\nOr press Enter for ${blue('node-basic')}: `
     );
-    template = input === '' ? 'node-basic' : (supportedTemplates[+input] as Template) || null;
+    template = input === '' ? 'node-basic' : supportedTemplates[+input] || null;
     if (!template) {
       console.log('Invalid template name');
     }
@@ -148,7 +144,7 @@ export const renameProject = async (projectName: string, destPath: string) => {
  */
 export const getSuccessString = (projectName: string, template: string) => {
   const emoji = '🦉';
-  const chars =53;
+  const chars = 53;
   const extraChars = projectName.length + template.length;
   const hashString = Array.from({ length: extraChars + chars })
     .map(el => '#')
@@ -156,7 +152,9 @@ export const getSuccessString = (projectName: string, template: string) => {
 
   const successString = `
 ${cyan(hashString)}
-${emoji} ${green('Success!')} Created new project ${yellow.bold(projectName)} using template: ${yellow.italic(template)} ${emoji}
+${emoji} ${green('Success!')} Created new project ${yellow.bold(
+    projectName
+  )} using template: ${yellow.italic(template)} ${emoji}
 ${cyan(hashString)}
 `;
   return successString;

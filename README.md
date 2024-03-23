@@ -8,5 +8,32 @@
 - Node.js v 16.7.0 or higher (required by fs.cp) (only in vanilla-node mode?)
 
 ### Notes
+
 - Vanilla uses Experimental fs.cp
 
+## References
+
+### eslint
+
+https://typescript-eslint.io/rules/
+
+### Express
+
+https://expressjs.com/
+
+### Express error-handling
+
+https://expressjs.com/en/guide/error-handling.html
+
+### Logging
+
+- Morgan
+- Winston
+
+### Monitoring (APM - app performance monitoring)
+
+- New Relic
+- AppDynamics
+- Dynatrace
+- DataDog (recommended)
+- Prometheus

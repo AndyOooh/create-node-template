@@ -5,4 +5,4 @@ const run = async () => {
   console.log('Todo #1: ', todo);
 };
 
-run();
+void run();

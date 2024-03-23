@@ -1,10 +1,11 @@
 import chalk from 'chalk';
 
-const hexRegEx: RegExp = /([0-9]|[a-f])/gim;
+// const hexRegEx: RegExp = /([0-9]|[a-f])/gim;
+const hexRegEx = /([0-9]|[a-f])/gim;
 
 const isHex = (value: string): boolean => {
   return (
-    (value.match(hexRegEx) || []).length === value.length &&
+    (value.match(hexRegEx) ?? []).length === value.length &&
     (value.length === 3 || value.length === 6)
   );
 };
@@ -25,7 +26,11 @@ export const inpuQuestions = [
     type: 'input',
     name: 'fav_color',
     message: "What's your favorite color",
-    transformer: (color: string, answers: Record<string, any>, flags: Record<string, any>) => {
+    transformer: (
+      color: string,
+      answers: Record<string, unknown>,
+      flags: Record<string, unknown>
+    ) => {
       const text = chalk.hex(isHex(color) ? color : 'fff')(color);
       if (flags.isFinal) {
         return text + '!';
