@@ -5,7 +5,7 @@ type AppError = {
   message: string;
   shouldLog: boolean;
   details?: string; // Optional, could have call stack or other details.
-  type? : string; // Optional, could be used to categorize errors
+  type?: string; // Optional, could be used to categorize errors
   isOperational?: boolean; // Optional, could be used to determine if error is operational or not
 };
 
