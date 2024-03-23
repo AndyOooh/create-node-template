@@ -6,9 +6,9 @@ name: Push to any - 3 Jobs
 run-name: Lint, Build, Test
 
 on:
-  # push:
-  #   branches-ignore:
-  #     - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 env:
