@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 
 export type AsyncHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
-// export type AsyncHandler = (req: Request, res: Response, next: NextFunction) => void;
 
 /*
  * A wrapper for async functions to catch any errors
  * Use with route handlers
+ * Issue with async/await: Express expects route handler to return a void, this return Promise<void>.
+ * Only an issue bc eslint rule no-misused-promises.
  */
 
 // export const asyncHandler =
@@ -18,23 +19,10 @@ export type AsyncHandler = (req: Request, res: Response, next: NextFunction) => 
 //   };
 
 /*
- *
+ * Does the same as the above function but returns void instead of Promise<void>.
  */
-export const asyncHandler = (fn: AsyncHandler) => {
+export const asyncHandler = (fn: AsyncHandler): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };
 };
-
-// export const asyncHandler = (fn: AsyncHandler) => {
-//   return (req: Request, res: Response, next: NextFunction) => {
-//     Promise.resolve(fn(req, res, next)).catch(reason => {
-//       const a = 1;
-//       next(reason);
-//     });
-//     Promise.reject(fn(req, res, next)).catch(reason => {
-//       const a = 1;
-//       next(reason);
-//     });
-//   };
-// };

@@ -30,10 +30,10 @@ https://expressjs.com/en/guide/error-handling.html
 - Morgan
 - Winston
 
-### Monitoring
+### Monitoring (APM - app performance monitoring)
 
 - New Relic
 - AppDynamics
 - Dynatrace
-- DataDog
+- DataDog (recommended)
 - Prometheus

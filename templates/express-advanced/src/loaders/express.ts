@@ -11,8 +11,8 @@ export const expressLoader = (app: Application) => {
   app.use('/', apiRoutes);
   app.use(resErrorHandler);
   app.use(logErrorHandler);
-  app.use((req, res, next) => {
-    const a = 22;
+  app.use((_req, _res, _next) => {
+    const _a = 22;
   });
 
   return app;

@@ -1,4 +1,4 @@
-import { Request, RequestHandler, Response } from 'express';
+import { Request, Response } from 'express';
 import { fetchUsers } from '@services/user';
 import { AsyncHandler } from 'src/api/middlewares/asyncHandler';
 
