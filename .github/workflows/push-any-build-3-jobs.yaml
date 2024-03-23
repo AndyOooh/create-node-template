@@ -11,7 +11,7 @@ on:
   #     - main
   workflow_dispatch:
 
-env:
+# env:
   # To use Remote Caching, uncomment the next lines and follow the steps below.
 
 jobs:
