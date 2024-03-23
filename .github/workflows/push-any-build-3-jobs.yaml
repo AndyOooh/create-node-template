@@ -42,7 +42,7 @@ jobs:
       - name: Install Bun
         run: npm i -g bun && bun --version
       - name: Install dependencies
-        run: bun i
+        run: bun i && cd templates/express-advanced && bun i
       - name: Lint
         run: bun lint
 
