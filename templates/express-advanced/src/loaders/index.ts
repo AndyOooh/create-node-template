@@ -1,5 +1,5 @@
 import { Application } from 'express';
-import { expressLoader } from './express';
+import { expressLoader } from './express.js';
 
 export const initLoaders = (app: Application) => {
   expressLoader(app);
