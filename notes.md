@@ -1,0 +1,1 @@
+- changed in pack.json: main to exports aaccrding tp: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c

@@ -19,6 +19,7 @@ export default tseslint.config(
       parserOptions: {
         project: true,
         tsconfigRootDir: import.meta.dirname,
+        libs: ['picocolors', 'conf'],
       },
     },
   },
