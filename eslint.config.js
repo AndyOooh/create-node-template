@@ -19,17 +19,15 @@ export default tseslint.config(
       parserOptions: {
         project: true,
         tsconfigRootDir: import.meta.dirname,
-        // libs: ['picocolors'],
+        libs: ['picocolors'],
       },
     },
   },
   {
-    // ignores: ['node_modules', 'dist', 'templates'],
     ignores: ['node_modules', 'dist', 'templates/node-basic', 'templates/express-basic'],
   },
   {
     rules: {
-      // '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
