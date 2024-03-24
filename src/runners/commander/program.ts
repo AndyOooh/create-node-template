@@ -447,7 +447,7 @@ async function notifyUpdate(): Promise<void> {
 
 run()
   .then(notifyUpdate)
-  .catch(async reason => {
+  .catch(async (reason: { command: string }) => {
     console.log();
     console.log('Aborting installation.');
     if (reason.command) {
