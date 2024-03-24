@@ -6,7 +6,7 @@ export type Template = 'node-basic' | 'node-advanced' | 'express-basic' | 'expre
 export const supportedPMs: PackageManager[] = ['npm', 'yarn', 'pnpm', 'bun'];
 export const supportedTemplates: Template[] = [
   'node-basic',
-  'node-advanced',
+  // 'node-advanced',
   'express-basic',
   'express-advanced',
 ];
