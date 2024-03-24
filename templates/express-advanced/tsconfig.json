@@ -2,17 +2,15 @@
 
 {
   "compilerOptions": {
-    
-    /* Start: tsconfig recommended node 21 */
-    // "lib": ["es2023"],
-    "module": "ESNext",
-    "moduleResolution": "Node", // node16
-    "target": "ES2020",
+    "lib": ["ESNext"],
+    "module": "NodeNext", // recommended for modern node projects
+    // Implied by `"module": "nodenext"`:
+    // "moduleResolution": "nodenext",
+    // "esModuleInterop": true,
+    // "target": "esnext",
     "strict": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    /* End: tsconfig recommended node 21 */
 
     "resolveJsonModule": true,
     "noImplicitAny": true,
@@ -21,13 +19,15 @@
     "baseUrl": ".", // neccessary for paths to work
     "rootDir": "src",
     "paths": {
-      "@config/*": ["src/config/*"],
       "@routes/*": ["src/api/routes/*"],
+      "@middleware/*": ["src/api/middleware/*"],
+      "@config/*": ["src/config/*"],
       "@controllers/*": ["src/controllers/*"],
+      "@loaders/*": ["src/loaders/*"],
       "@models/*": ["src/models/*"],
       "@services/*": ["src/services/*"],
-      "@loaders/*": ["src/loaders/*"],
-      "@middleware/*": ["src/middleware/*"]
+      "@_types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src", "eslint.config.js"]

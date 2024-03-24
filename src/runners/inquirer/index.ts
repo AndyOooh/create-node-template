@@ -1,17 +1,14 @@
 import inquirer from 'inquirer';
-import { listInquiry } from './examples/list';
+import { listInquiry } from './examples/list.js';
 
 export const runWithInquirer = async () => {
   // Select package manager
   // Select name of project
   // Start node project with -y command using the chosen package manager
-
   // const questions = inpuQuestions
-
   // inquirer.prompt(questions).then((answers: Record<string, any>) => {
   //   console.log(JSON.stringify(answers, null, '  '));
   // });
-
   // const packManagers = packageManagers;
   // console.log('🚀  packManagers:', packManagers);
   // const questions = listInquiry;

@@ -8,8 +8,8 @@ import {
   installCommandMap,
   renameProject,
   runCmd,
-} from './utils';
-import { cyan, green } from '@utils/index';
+} from './utils.js';
+import { cyan, green } from '@utils/index.js';
 
 export const runWithNode = async () => {
   try {

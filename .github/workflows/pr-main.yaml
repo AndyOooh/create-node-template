@@ -28,7 +28,7 @@ jobs:
         run: bun i && cd templates/express-advanced && bun i
 
       - name: Lint
-        run: bun lint
+        run: bun run lint && cd templates/express-advanced && bun run lint
 
       - name: Build
         run: |

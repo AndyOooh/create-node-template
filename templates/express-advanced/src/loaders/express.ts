@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
-import { apiRoutes } from '@routes/index';
-import { resErrorHandler, logErrorHandler } from 'src/api/middlewares/errorHandler';
+import { apiRoutes } from '@routes/index.js';
+import { resErrorHandler, logErrorHandler } from 'src/api/middlewares/errorHandler.js';
 
 export const expressLoader = (app: Application) => {
   app.get('/status', (req, res) => {

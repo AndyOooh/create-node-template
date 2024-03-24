@@ -1,6 +1,6 @@
 import express from 'express';
-import { getUsers } from '@controllers/users';
-import { asyncHandler } from 'src/api/middlewares/asyncHandler';
+import { getUsers } from '@controllers/users/index.js';
+import { asyncHandler } from 'src/api/middlewares/asyncHandler.js';
 
 const router = express.Router();
 
