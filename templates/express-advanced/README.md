@@ -1,8 +1,8 @@
-# Create-node-template
+# Express-advanced
 
 ## Description
 
-This project is a template for creating a new node project. It is a CLI tool that will create a new project with the following features:
+This is a template for a production ready Express.js server.
 
 ## Table of Contents
 
@@ -12,18 +12,17 @@ This project is a template for creating a new node project. It is a CLI tool tha
 
 ## How to use
 
-```
-npx create-node-template <project-name> --flags
-```
-
-1. Select name of project (if not using flag).
-2. Select package manager (npm, yarn, pnpm, bun).
-3. Select template (node-basic, express-basic, express-advanced).
+The folling scripts are available in Package.json:
+- `build` - compiles the server.
+- `dev` - starts the server with tsx.
+- `lint` - lints the typescript code with eslint.
+- `start` - starts the server.
+- `test` - runs the tests with jest.
 
 ## Features
 - Import path aliases. 
 - Eslint flat config file (needs VSCode setting).
-- 
+- Jest ??
 
 ## References
 
