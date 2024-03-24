@@ -71,7 +71,7 @@ jobs:
         run: npm i -g bun && bun --version
       - name: Build
         run: |
-          bun build && cd templates/express-advanced && bun build
+          bun run build && cd templates/express-advanced && bun run build
 
   # test:
   #   runs-on: ubuntu-latest
