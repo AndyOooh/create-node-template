@@ -58,6 +58,7 @@
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.11.27",
     "@types/prompts": "^2.4.9",
+    "@types/validate-npm-package-name": "^4.0.2",
     "commander": "^12.0.0",
     "conf": "^12.0.0",
     "eslint": "^8.57.0",
@@ -66,7 +67,8 @@
     "resolve-tspaths": "^0.8.18",
     "typescript": "^5.4.2",
     "typescript-eslint": "^7.3.1",
-    "update-check": "^1.5.4"
+    "update-check": "^1.5.4",
+    "validate-npm-package-name": "^5.0.0"
   },
   "dependencies": {
     "@inquirer/checkbox": "^2.2.0",

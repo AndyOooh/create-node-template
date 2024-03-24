@@ -2,19 +2,40 @@
 import { cyan, green, red, yellow, bold, blue } from 'picocolors';
 import { Command } from 'commander';
 import Conf from 'conf';
-import path from 'path';
+import checkForUpdate from 'update-check';
 import prompts from 'prompts';
 import type { InitialReturnValue } from 'prompts';
-import checkForUpdate from 'update-check';
+
 // import { createApp, DownloadError } from './create-app';
 // import { getPkgManager } from './helpers/get-pkg-manager';
 // import { validateNpmName } from './helpers/validate-pkg';
 // import { isFolderEmpty } from './helpers/is-folder-empty';
-import packageJson from '.../../../package.json';
 // import ciInfo from 'ci-info';
+
 import fs from 'fs';
+import path from 'path';
+
+import { validateNpmName } from './helpers.ts/validate-pkg.js';
+import { getPkgManager } from './helpers.ts/get-pkg-manager.js';
+import { isFolderEmpty } from './helpers.ts/is-folder-empty.js';
+import packageJson from '.../../../package.json';
 
 let projectPath = '';
+
+// const schema = {
+//   foo: {
+//     type: 'number',
+//     maximum: 100,
+//     minimum: 1,
+//     default: 50,
+//   },
+//   bar: {
+//     type: 'string',
+//     format: 'url',
+//   },
+// };
+
+// const conf = new Conf({ projectName: 'create-node-template', schema });
 
 const handleSigTerm = () => process.exit(0);
 
@@ -31,6 +52,13 @@ const onPromptState = (state: { value: InitialReturnValue; aborted: boolean; exi
   }
 };
 
+const formatDesc = (description: string): string => {
+  return `
+
+  ${description}
+`;
+};
+
 const program = new Command(packageJson.name)
   .version(packageJson.version)
   .arguments('<project-directory>')
@@ -38,86 +66,69 @@ const program = new Command(packageJson.name)
   .action((name: string) => {
     projectPath = name;
   })
-  //   .option(
-  //     '--eslint',
-  //     `
-
-  //   Initialize with eslint config.
-  // `
-  //   )
-  //   .option(
-  //     '--import-alias <alias-to-configure>',
-  //     `
-
-  //   Specify import alias to use (default "@/*").
-  // `
-  //   )
+  .option('--eslint', formatDesc('Initialize with eslint config.'))
   .option(
-    '--use-npm',
-    `
-
-  Explicitly tell the CLI to bootstrap the application using npm
-`
+    '--import-alias <alias-to-configure>',
+    formatDesc('Specify import alias to use (default "@/*").')
   )
+  .option('--use-npm', formatDesc('Explicitly tell the CLI to bootstrap the application using npm'))
   .option(
     '--use-pnpm',
-    `
-
-  Explicitly tell the CLI to bootstrap the application using pnpm
-`
+    formatDesc('Explicitly tell the CLI to bootstrap the application using pnpm')
   )
   .option(
     '--use-yarn',
-    `
-
-  Explicitly tell the CLI to bootstrap the application using Yarn
-`
+    formatDesc('Explicitly tell the CLI to bootstrap the application using Yarn')
   )
-  .option(
-    '--use-bun',
-    `
-
-  Explicitly tell the CLI to bootstrap the application using Bun
-`
-  )
+  .option('--use-bun', formatDesc('Explicitly tell the CLI to bootstrap the application using Bun'))
   .option(
     '-t, --template [name]',
-    `
-
-  Which template to bootstrap the app with. You can use any of:
-  - node-basic: A basic Node.js app.
-  - express-basic: A basic Express.js app.
-  - express-advanced: An advanced Express.js app with ready for production.
-`
+    formatDesc(
+      'Which template to bootstrap the app with. You can use any of:\n' +
+        '  - node-basic: A basic Node.js app.\n' +
+        '  - express-basic: A basic Express.js app.\n' +
+        '  - express-advanced: An advanced Express.js app with ready for production.'
+    )
   )
   .option(
     '--reset-preferences',
-    `
-
-  Explicitly tell the CLI to reset any stored preferences
-  `
+    formatDesc('Explicitly tell the CLI to reset any stored preferences')
   )
   .allowUnknownOption()
   .parse(process.argv);
 
-const packageManager = !!program.useNpm
+const optionsS = program.opts();
+// const packageManager = 'npm';
+const packageManager = optionsS.useNpm
   ? 'npm'
-  : !!program.usePnpm
+  : optionsS.usePnpm
   ? 'pnpm'
-  : !!program.useYarn
+  : optionsS.useYarn
   ? 'yarn'
-  : !!program.useBun
+  : optionsS.useBun
   ? 'bun'
   : getPkgManager();
 
+// const packageManager = !!program.useNpm
+//   ? 'npm'
+//   : !!program.usePnpm
+//   ? 'pnpm'
+//   : !!program.useYarn
+//   ? 'yarn'
+//   : !!program.useBun
+//   ? 'bun'
+//   : getPkgManager();
+
 async function run(): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  /* negate the above */
   const conf = new Conf({ projectName: 'create-node-template' });
 
-  if (program.resetPreferences) {
-    conf.clear();
-    console.log(`Preferences reset successfully`);
-    return;
-  }
+  // if (optionsS.resetPreferences) {
+  //   conf.clear();
+  //   console.log(`Preferences reset successfully`);
+  //   return;
+  // }
 
   if (typeof projectPath === 'string') {
     projectPath = projectPath.trim();
@@ -130,7 +141,7 @@ async function run(): Promise<void> {
       name: 'path',
       message: 'What is your project named?',
       initial: 'my-app',
-      validate: name => {
+      validate: (name: string) => {
         const validation = validateNpmName(path.basename(path.resolve(name)));
         if (validation.valid) {
           return true;
@@ -170,10 +181,10 @@ async function run(): Promise<void> {
     process.exit(1);
   }
 
-  if (program.example === true) {
-    console.error('Please provide a template name, otherwise remove the template option.');
-    process.exit(1);
-  }
+  // if (program.example === true) {
+  //   console.error('Please provide a template name, otherwise remove the template option.');
+  //   process.exit(1);
+  // }
   // if (program.example === true) {
   //   console.error(
   //     'Please provide an example name or url, otherwise remove the example option.'
@@ -192,7 +203,7 @@ async function run(): Promise<void> {
     process.exit(1);
   }
 
-  const template = typeof program.template === 'string' && program.template.trim();
+  const template = typeof optionsS.template === 'string' && optionsS.template.trim();
   const preferences = (conf.get('preferences') || {}) as Record<string, boolean | string>;
   /**
    * If the user does not provide the necessary flags, prompt them for whether
@@ -210,198 +221,198 @@ async function run(): Promise<void> {
     };
     const getPrefOrDefault = (field: string) => preferences[field] ?? defaults[field];
 
-    if (!program.typescript && !program.javascript) {
-      if (ciInfo.isCI) {
-        // default to TypeScript in CI as we can't prompt to
-        // prevent breaking setup flows
-        program.typescript = getPrefOrDefault('typescript');
-      } else {
-        const styledTypeScript = blue('TypeScript');
-        const { typescript } = await prompts(
-          {
-            type: 'toggle',
-            name: 'typescript',
-            message: `Would you like to use ${styledTypeScript}?`,
-            initial: getPrefOrDefault('typescript'),
-            active: 'Yes',
-            inactive: 'No',
-          },
-          {
-            /**
-             * User inputs Ctrl+C or Ctrl+D to exit the prompt. We should close the
-             * process and not write to the file system.
-             */
-            onCancel: () => {
-              console.error('Exiting.');
-              process.exit(1);
-            },
-          }
-        );
-        /**
-         * Depending on the prompt response, set the appropriate program flags.
-         */
-        program.typescript = Boolean(typescript);
-        program.javascript = !Boolean(typescript);
-        preferences.typescript = Boolean(typescript);
-      }
-    }
+    // if (!program.typescript && !program.javascript) {
+    //   if (ciInfo.isCI) {
+    //     // default to TypeScript in CI as we can't prompt to
+    //     // prevent breaking setup flows
+    //     program.typescript = getPrefOrDefault('typescript');
+    //   } else {
+    //     const styledTypeScript = blue('TypeScript');
+    //     const { typescript } = await prompts(
+    //       {
+    //         type: 'toggle',
+    //         name: 'typescript',
+    //         message: `Would you like to use ${styledTypeScript}?`,
+    //         initial: getPrefOrDefault('typescript'),
+    //         active: 'Yes',
+    //         inactive: 'No',
+    //       },
+    //       {
+    //         /**
+    //          * User inputs Ctrl+C or Ctrl+D to exit the prompt. We should close the
+    //          * process and not write to the file system.
+    //          */
+    //         onCancel: () => {
+    //           console.error('Exiting.');
+    //           process.exit(1);
+    //         },
+    //       }
+    //     );
+    //     /**
+    //      * Depending on the prompt response, set the appropriate program flags.
+    //      */
+    //     program.typescript = Boolean(typescript);
+    //     program.javascript = !Boolean(typescript);
+    //     preferences.typescript = Boolean(typescript);
+    //   }
+    // }
 
-    if (!process.argv.includes('--eslint') && !process.argv.includes('--no-eslint')) {
-      if (ciInfo.isCI) {
-        program.eslint = getPrefOrDefault('eslint');
-      } else {
-        const styledEslint = blue('ESLint');
-        const { eslint } = await prompts({
-          onState: onPromptState,
-          type: 'toggle',
-          name: 'eslint',
-          message: `Would you like to use ${styledEslint}?`,
-          initial: getPrefOrDefault('eslint'),
-          active: 'Yes',
-          inactive: 'No',
-        });
-        program.eslint = Boolean(eslint);
-        preferences.eslint = Boolean(eslint);
-      }
-    }
+    // if (!process.argv.includes('--eslint') && !process.argv.includes('--no-eslint')) {
+    //   if (ciInfo.isCI) {
+    //     program.eslint = getPrefOrDefault('eslint');
+    //   } else {
+    //     const styledEslint = blue('ESLint');
+    //     const { eslint } = await prompts({
+    //       onState: onPromptState,
+    //       type: 'toggle',
+    //       name: 'eslint',
+    //       message: `Would you like to use ${styledEslint}?`,
+    //       initial: getPrefOrDefault('eslint'),
+    //       active: 'Yes',
+    //       inactive: 'No',
+    //     });
+    //     program.eslint = Boolean(eslint);
+    //     preferences.eslint = Boolean(eslint);
+    //   }
+    // }
 
-    if (!process.argv.includes('--tailwind') && !process.argv.includes('--no-tailwind')) {
-      if (ciInfo.isCI) {
-        program.tailwind = getPrefOrDefault('tailwind');
-      } else {
-        const tw = blue('Tailwind CSS');
-        const { tailwind } = await prompts({
-          onState: onPromptState,
-          type: 'toggle',
-          name: 'tailwind',
-          message: `Would you like to use ${tw}?`,
-          initial: getPrefOrDefault('tailwind'),
-          active: 'Yes',
-          inactive: 'No',
-        });
-        program.tailwind = Boolean(tailwind);
-        preferences.tailwind = Boolean(tailwind);
-      }
-    }
+    // if (!process.argv.includes('--tailwind') && !process.argv.includes('--no-tailwind')) {
+    //   if (ciInfo.isCI) {
+    //     program.tailwind = getPrefOrDefault('tailwind');
+    //   } else {
+    //     const tw = blue('Tailwind CSS');
+    //     const { tailwind } = await prompts({
+    //       onState: onPromptState,
+    //       type: 'toggle',
+    //       name: 'tailwind',
+    //       message: `Would you like to use ${tw}?`,
+    //       initial: getPrefOrDefault('tailwind'),
+    //       active: 'Yes',
+    //       inactive: 'No',
+    //     });
+    //     program.tailwind = Boolean(tailwind);
+    //     preferences.tailwind = Boolean(tailwind);
+    //   }
+    // }
 
-    if (!process.argv.includes('--src-dir') && !process.argv.includes('--no-src-dir')) {
-      if (ciInfo.isCI) {
-        program.srcDir = getPrefOrDefault('srcDir');
-      } else {
-        const styledSrcDir = blue('`src/` directory');
-        const { srcDir } = await prompts({
-          onState: onPromptState,
-          type: 'toggle',
-          name: 'srcDir',
-          message: `Would you like to use ${styledSrcDir}?`,
-          initial: getPrefOrDefault('srcDir'),
-          active: 'Yes',
-          inactive: 'No',
-        });
-        program.srcDir = Boolean(srcDir);
-        preferences.srcDir = Boolean(srcDir);
-      }
-    }
+    // if (!process.argv.includes('--src-dir') && !process.argv.includes('--no-src-dir')) {
+    //   if (ciInfo.isCI) {
+    //     program.srcDir = getPrefOrDefault('srcDir');
+    //   } else {
+    //     const styledSrcDir = blue('`src/` directory');
+    //     const { srcDir } = await prompts({
+    //       onState: onPromptState,
+    //       type: 'toggle',
+    //       name: 'srcDir',
+    //       message: `Would you like to use ${styledSrcDir}?`,
+    //       initial: getPrefOrDefault('srcDir'),
+    //       active: 'Yes',
+    //       inactive: 'No',
+    //     });
+    //     program.srcDir = Boolean(srcDir);
+    //     preferences.srcDir = Boolean(srcDir);
+    //   }
+    // }
 
-    if (!process.argv.includes('--app') && !process.argv.includes('--no-app')) {
-      if (ciInfo.isCI) {
-        program.app = getPrefOrDefault('app');
-      } else {
-        const styledAppDir = blue('App Router');
-        const { appRouter } = await prompts({
-          onState: onPromptState,
-          type: 'toggle',
-          name: 'appRouter',
-          message: `Would you like to use ${styledAppDir}? (recommended)`,
-          initial: getPrefOrDefault('app'),
-          active: 'Yes',
-          inactive: 'No',
-        });
-        program.app = Boolean(appRouter);
-      }
-    }
+    // if (!process.argv.includes('--app') && !process.argv.includes('--no-app')) {
+    //   if (ciInfo.isCI) {
+    //     program.app = getPrefOrDefault('app');
+    //   } else {
+    //     const styledAppDir = blue('App Router');
+    //     const { appRouter } = await prompts({
+    //       onState: onPromptState,
+    //       type: 'toggle',
+    //       name: 'appRouter',
+    //       message: `Would you like to use ${styledAppDir}? (recommended)`,
+    //       initial: getPrefOrDefault('app'),
+    //       active: 'Yes',
+    //       inactive: 'No',
+    //     });
+    //     program.app = Boolean(appRouter);
+    //   }
+    // }
 
-    if (typeof program.importAlias !== 'string' || !program.importAlias.length) {
-      if (ciInfo.isCI) {
-        // We don't use preferences here because the default value is @/* regardless of existing preferences
-        program.importAlias = defaults.importAlias;
-      } else if (process.argv.includes('--no-import-alias')) {
-        program.importAlias = defaults.importAlias;
-      } else {
-        const styledImportAlias = blue('import alias');
+    // if (typeof program.importAlias !== 'string' || !program.importAlias.length) {
+    //   if (ciInfo.isCI) {
+    //     // We don't use preferences here because the default value is @/* regardless of existing preferences
+    //     program.importAlias = defaults.importAlias;
+    //   } else if (process.argv.includes('--no-import-alias')) {
+    //     program.importAlias = defaults.importAlias;
+    //   } else {
+    //     const styledImportAlias = blue('import alias');
 
-        const { customizeImportAlias } = await prompts({
-          onState: onPromptState,
-          type: 'toggle',
-          name: 'customizeImportAlias',
-          message: `Would you like to customize the default ${styledImportAlias} (${defaults.importAlias})?`,
-          initial: getPrefOrDefault('customizeImportAlias'),
-          active: 'Yes',
-          inactive: 'No',
-        });
+    //     const { customizeImportAlias } = await prompts({
+    //       onState: onPromptState,
+    //       type: 'toggle',
+    //       name: 'customizeImportAlias',
+    //       message: `Would you like to customize the default ${styledImportAlias} (${defaults.importAlias})?`,
+    //       initial: getPrefOrDefault('customizeImportAlias'),
+    //       active: 'Yes',
+    //       inactive: 'No',
+    //     });
 
-        if (!customizeImportAlias) {
-          // We don't use preferences here because the default value is @/* regardless of existing preferences
-          program.importAlias = defaults.importAlias;
-        } else {
-          const { importAlias } = await prompts({
-            onState: onPromptState,
-            type: 'text',
-            name: 'importAlias',
-            message: `What ${styledImportAlias} would you like configured?`,
-            initial: getPrefOrDefault('importAlias'),
-            validate: value =>
-              /.+\/\*/.test(value) ? true : 'Import alias must follow the pattern <prefix>/*',
-          });
-          program.importAlias = importAlias;
-          preferences.importAlias = importAlias;
-        }
-      }
-    }
+    //     if (!customizeImportAlias) {
+    //       // We don't use preferences here because the default value is @/* regardless of existing preferences
+    //       program.importAlias = defaults.importAlias;
+    //     } else {
+    //       const { importAlias } = await prompts({
+    //         onState: onPromptState,
+    //         type: 'text',
+    //         name: 'importAlias',
+    //         message: `What ${styledImportAlias} would you like configured?`,
+    //         initial: getPrefOrDefault('importAlias'),
+    //         validate: value =>
+    //           /.+\/\*/.test(value) ? true : 'Import alias must follow the pattern <prefix>/*',
+    //       });
+    //       program.importAlias = importAlias;
+    //       preferences.importAlias = importAlias;
+    //     }
+    //   }
+    // }
   }
 
-  try {
-    await createApp({
-      appPath: resolvedProjectPath,
-      packageManager,
-      // example: example && example !== 'default' ? example : undefined,
-      // examplePath: program.examplePath,
-      typescript: program.typescript,
-      tailwind: program.tailwind,
-      eslint: program.eslint,
-      appRouter: program.app,
-      srcDir: program.srcDir,
-      importAlias: program.importAlias,
-    });
-  } catch (reason) {
-    if (!(reason instanceof DownloadError)) {
-      throw reason;
-    }
+  // try {
+  //   await createApp({
+  //     appPath: resolvedProjectPath,
+  //     packageManager,
+  //     // example: example && example !== 'default' ? example : undefined,
+  //     // examplePath: program.examplePath,
+  //     typescript: program.typescript,
+  //     tailwind: program.tailwind,
+  //     eslint: program.eslint,
+  //     appRouter: program.app,
+  //     srcDir: program.srcDir,
+  //     importAlias: program.importAlias,
+  //   });
+  // } catch (reason) {
+  //   if (!(reason instanceof DownloadError)) {
+  //     throw reason;
+  //   }
 
-    const res = await prompts({
-      onState: onPromptState,
-      type: 'confirm',
-      name: 'builtin',
-      message:
-        `Could not download "${example}" because of a connectivity issue between your machine and GitHub.\n` +
-        `Do you want to use the default template instead?`,
-      initial: true,
-    });
-    if (!res.builtin) {
-      throw reason;
-    }
+  //   const res = await prompts({
+  //     onState: onPromptState,
+  //     type: 'confirm',
+  //     name: 'builtin',
+  //     message:
+  //       `Could not download "${example}" because of a connectivity issue between your machine and GitHub.\n` +
+  //       `Do you want to use the default template instead?`,
+  //     initial: true,
+  //   });
+  //   if (!res.builtin) {
+  //     throw reason;
+  //   }
 
-    await createApp({
-      appPath: resolvedProjectPath,
-      packageManager,
-      typescript: program.typescript,
-      eslint: program.eslint,
-      tailwind: program.tailwind,
-      appRouter: program.app,
-      srcDir: program.srcDir,
-      importAlias: program.importAlias,
-    });
-  }
+  //   await createApp({
+  //     appPath: resolvedProjectPath,
+  //     packageManager,
+  //     typescript: program.typescript,
+  //     eslint: program.eslint,
+  //     tailwind: program.tailwind,
+  //     appRouter: program.app,
+  //     srcDir: program.srcDir,
+  //     importAlias: program.importAlias,
+  //   });
+  // }
   conf.set('preferences', preferences);
 }
 

@@ -43,6 +43,8 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-function': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
     },
   }
 );

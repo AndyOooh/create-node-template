@@ -1,1 +1,2 @@
-- changed in pack.json: main to exports aaccrding tp: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+- changed in pack.json: main to exports accrding tp: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+- change moduleResultion and module in tsconfig.
