@@ -3,8 +3,8 @@ import * as readline from 'node:readline/promises';
 import * as fs from 'node:fs/promises';
 import path from 'path';
 import { exec } from 'node:child_process';
-import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index';
-import { blue, cyan, green, italic, magenta, red, underline, yellow } from '@utils/index';
+import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index.js';
+import { blue, cyan, green, italic, magenta, red, underline, yellow } from '@utils/index.js';
 
 /*
  * Execute command asynchronusly

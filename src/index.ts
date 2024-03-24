@@ -1,10 +1,10 @@
 #! /usr/bin/env tsx
 
-import { runWithCommander } from '@runners/commander';
-import { runWithInquirer } from '@runners/inquirer';
-import { runWithNode } from '@runners/vanilla-node';
-import { runner } from './config';
-import { underline } from './utils';
+import { runner } from '@config/index.js';
+import { runWithCommander } from '@runners/commander/index.js';
+import { runWithInquirer } from '@runners/inquirer/index.js';
+import { runWithNode } from '@runners/vanilla-node/index.js';
+import { underline } from '@utils/index.js';
 
 /**
  * CLI entry point

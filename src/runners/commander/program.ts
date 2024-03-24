@@ -1,41 +1,24 @@
 #!/usr/bin/env node
-import { cyan, green, red, yellow, bold, blue } from 'picocolors';
+import { cyan, green, red, yellow, bold } from '@utils/index.js';
+// import { cyan, green, red, yellow, bold, blue } from 'picocolors';
 import { Command } from 'commander';
 import Conf from 'conf';
 import checkForUpdate from 'update-check';
 import prompts from 'prompts';
+
 import type { InitialReturnValue } from 'prompts';
+import { getPkgManager } from './helpers/get-pkg-manager.js';
+import { isFolderEmpty } from './helpers/is-folder-empty.js';
+import { validateNpmName } from './helpers/validate-pkg.js';
+import packageJson from '../../../package.json';
 
 // import { createApp, DownloadError } from './create-app';
-// import { getPkgManager } from './helpers/get-pkg-manager';
-// import { validateNpmName } from './helpers/validate-pkg';
-// import { isFolderEmpty } from './helpers/is-folder-empty';
 // import ciInfo from 'ci-info';
 
 import fs from 'fs';
 import path from 'path';
 
-import { validateNpmName } from './helpers.ts/validate-pkg.js';
-import { getPkgManager } from './helpers.ts/get-pkg-manager.js';
-import { isFolderEmpty } from './helpers.ts/is-folder-empty.js';
-import packageJson from '.../../../package.json';
-
 let projectPath = '';
-
-// const schema = {
-//   foo: {
-//     type: 'number',
-//     maximum: 100,
-//     minimum: 1,
-//     default: 50,
-//   },
-//   bar: {
-//     type: 'string',
-//     format: 'url',
-//   },
-// };
-
-// const conf = new Conf({ projectName: 'create-node-template', schema });
 
 const handleSigTerm = () => process.exit(0);
 

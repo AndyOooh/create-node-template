@@ -1,6 +1,7 @@
-import { green, blue } from 'picocolors'
-import fs from 'fs'
-import path from 'path'
+// import { blue, green } from 'picocolors';
+import { blue, green } from '@utils/index.js';
+import fs from 'fs';
+import path from 'path';
 
 export function isFolderEmpty(root: string, name: string): boolean {
   const validFiles = [
@@ -24,39 +25,35 @@ export function isFolderEmpty(root: string, name: string): boolean {
     'yarn-error.log',
     'yarnrc.yml',
     '.yarn',
-  ]
+  ];
 
   const conflicts = fs.readdirSync(root).filter(
-    (file) =>
+    file =>
       !validFiles.includes(file) &&
       // Support IntelliJ IDEA-based editors
-      !file.endsWith(".iml")
-  )
+      !file.endsWith('.iml')
+  );
 
   if (conflicts.length > 0) {
-    console.log(
-      `The directory ${green(name)} contains files that could conflict:`
-    )
-    console.log()
+    console.log(`The directory ${green(name)} contains files that could conflict:`);
+    console.log();
     for (const file of conflicts) {
       try {
-        const stats = fs.lstatSync(path.join(root, file))
+        const stats = fs.lstatSync(path.join(root, file));
         if (stats.isDirectory()) {
-          console.log(`  ${blue(file)}/`)
+          console.log(`  ${blue(file)}/`);
         } else {
-          console.log(`  ${file}`)
+          console.log(`  ${file}`);
         }
       } catch {
-        console.log(`  ${file}`)
+        console.log(`  ${file}`);
       }
     }
-    console.log()
-    console.log(
-      'Either try using a new directory name, or remove the files listed above.'
-    )
-    console.log()
-    return false
+    console.log();
+    console.log('Either try using a new directory name, or remove the files listed above.');
+    console.log();
+    return false;
   }
 
-  return true
+  return true;
 }

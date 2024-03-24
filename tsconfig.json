@@ -3,14 +3,34 @@
 {
   "compilerOptions": {
     /* Start: tsconfig recommended node 21 */
-    "lib": ["es2023"],
+    "lib": [
+      "ES2015",
+      "ES2016",
+      "ES2017",
+      "ES2018",
+      "ES2019",
+      "ES2020",
+      "ES2021",
+      "ES2022",
+      "ES2023",
+      "ESNext",
+      "ES6",
+      "ES7"
+    ],
+
+    // "module": "Node16",
+    // "moduleResolution": "Node16",
+
     // "module": "ESNext",
-    // "moduleResolution": "Node", // rec: node16
-    "module": "Node16", // neccesary for conf to work.
-    "moduleResolution": "Node16", // rec: node16
-    "target": "ES2020",
+    // "moduleResolution": "Bundler",
+
+    "module": "NodeNext", // recommended for modern node projects
+    // Implied by `"module": "nodenext"`:
+    // "moduleResolution": "nodenext",
+    // "esModuleInterop": true,
+    // "target": "esnext",
+
     "strict": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     /* End: tsconfig recommended node 21 */
@@ -27,5 +47,5 @@
       "@runners/*": ["src/runners/*"]
     }
   },
-  "include": ["src", "eslint.config.js"]
+  "include": ["src", "eslint.config.js", "package.json", "./package.json", "./test.ts", "test.ts"]
 }
