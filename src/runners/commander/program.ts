@@ -416,7 +416,7 @@ async function run(): Promise<void> {
   conf.set('preferences', preferences);
 }
 
-const update = checkForUpdate(packageJson).catch(() => null);
+const update = checkForUpdate.default(packageJson).catch(() => null);
 
 async function notifyUpdate(): Promise<void> {
   try {
