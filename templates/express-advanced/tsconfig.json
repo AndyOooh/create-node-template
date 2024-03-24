@@ -26,7 +26,7 @@
       "@loaders/*": ["src/loaders/*"],
       "@models/*": ["src/models/*"],
       "@services/*": ["src/services/*"],
-      "@types/*": ["src/types/*"],
+      "@_types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
     }
   },
