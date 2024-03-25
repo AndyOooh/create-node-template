@@ -323,7 +323,8 @@ export const runWithCommander = async (): Promise<void> => {
   conf.set('preferences', preferences);
 
   try {
-    await notifyUpdate(packageManager);
+    // await notifyUpdate(packageManager);
+    notifyUpdate(packageManager);
   } catch (error) {
     console.log();
     console.log('Aborting installation.');
@@ -335,7 +336,8 @@ export const runWithCommander = async (): Promise<void> => {
     }
     console.log();
 
-    await notifyUpdate(packageManager);
+    // await notifyUpdate(packageManager);
+    notifyUpdate(packageManager);
 
     process.exit(1);
   }
