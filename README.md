@@ -11,7 +11,6 @@ A CLI template generator for Node.js projects with **modern Typescript configura
 
 ### Table of Contents
 
-<!-- - [Description](#description) -->
 - [Prerequisites](#prerequisites)
 - [How to use](#how-to-use)
 - [Features](#features)
@@ -19,10 +18,6 @@ A CLI template generator for Node.js projects with **modern Typescript configura
   - [Express Basic](#express-basic)
   - [Express Advanced](#express-advanced)
 - [References](#references)
-- [Notes](#notes)
-  - [Logging](#logging)
-  - [Monitoring (APM - app performance monitoring)](#monitoring-apm---app-performance-monitoring)
-
 
 ### Prerequisites
 
@@ -34,6 +29,7 @@ A CLI template generator for Node.js projects with **modern Typescript configura
 ```
 npx create-node-template <project-name> --flags
 ```
+
 Arguments and [flags](#flags) are optional.
 
 ## Features
@@ -56,6 +52,7 @@ Arguments and [flags](#flags) are optional.
 - Express monitoring
 
 ### Flags
+
 - -t, --template
 - -pm. --package-manager
 
@@ -68,21 +65,3 @@ Arguments and [flags](#flags) are optional.
 - [@typescript-eslint Rules](https://eslint.org/docs/rules/)
 - Create Next App GH repo
 - NPM docs
-
-## Notes
-
-- node-basic uses Experimental fs.cp.
-- VSCode eslint setting for flat config file.
-
-### Logging
-
-- Morgan
-- Winston
-
-### Monitoring (APM - app performance monitoring)
-
-- New Relic
-- AppDynamics
-- Dynatrace
-- DataDog (recommended)
-- Prometheus
