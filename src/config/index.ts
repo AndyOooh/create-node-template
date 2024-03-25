@@ -1,4 +1,4 @@
-export const runner: 'node' | 'inquirer' | 'commander' = 'node';
+export const runner: 'node' | 'inquirer' | 'commander' = 'commander';
 
 export type PackageManager = 'npm' | 'yarn' | 'pnpm' | 'bun';
 export type Template = 'node-basic' | 'node-advanced' | 'express-basic' | 'express-advanced';

@@ -1,19 +1,84 @@
+#!/usr/bin/env node
+import { cyan, green, red, yellow, bold } from '@utils/index.js';
+// import { cyan, green, red, yellow, bold, blue } from 'picocolors';
 import { Command } from 'commander';
 import Conf from 'conf';
 import checkForUpdate from 'update-check';
 import prompts from 'prompts';
 
-import fs from 'fs';
-import path from 'path';
-
-// import { cyan, green, red, yellow, bold, blue } from 'picocolors';
-import { cyan, green, red, yellow, bold } from '@utils/index.js';
+import type { InitialReturnValue } from 'prompts';
 import { getPkgManager } from './helpers/get-pkg-manager.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
 import { validateNpmName } from './helpers/validate-pkg.js';
 import packageJson from '../../../package.json';
-import { program } from './program.js';
-import { notifyUpdate, onPromptState } from './helpers/misc.js';
+
+// import { createApp, DownloadError } from './create-app';
+// import ciInfo from 'ci-info';
+
+import fs from 'fs';
+import path from 'path';
+
+let projectPath = '';
+
+const handleSigTerm = () => process.exit(0);
+
+process.on('SIGINT', handleSigTerm);
+process.on('SIGTERM', handleSigTerm);
+
+const onPromptState = (state: { value: InitialReturnValue; aborted: boolean; exited: boolean }) => {
+  if (state.aborted) {
+    // If we don't re-enable the terminal cursor before exiting
+    // the program, the cursor will remain hidden
+    process.stdout.write('\x1B[?25h');
+    process.stdout.write('\n');
+    process.exit(1);
+  }
+};
+
+const formatDesc = (description: string): string => {
+  return `
+
+  ${description}
+`;
+};
+
+const program = new Command(packageJson.name)
+  .version(packageJson.version)
+  .arguments('<project-directory>')
+  .usage(`${green('<project-directory>')} [options]`)
+  .action((name: string) => {
+    projectPath = name;
+  })
+  .option('--eslint', formatDesc('Initialize with eslint config.'))
+  .option(
+    '--import-alias <alias-to-configure>',
+    formatDesc('Specify import alias to use (default "@/*").')
+  )
+  .option('--use-npm', formatDesc('Explicitly tell the CLI to bootstrap the application using npm'))
+  .option(
+    '--use-pnpm',
+    formatDesc('Explicitly tell the CLI to bootstrap the application using pnpm')
+  )
+  .option(
+    '--use-yarn',
+    formatDesc('Explicitly tell the CLI to bootstrap the application using Yarn')
+  )
+  .option('--use-bun', formatDesc('Explicitly tell the CLI to bootstrap the application using Bun'))
+  .option(
+    '-t, --template [name]',
+    formatDesc(
+      'Which template to bootstrap the app with. You can use any of:\n' +
+        '  - node-basic: A basic Node.js app.\n' +
+        '  - express-basic: A basic Express.js app.\n' +
+        '  - express-advanced: An advanced Express.js app with ready for production.'
+    )
+  )
+  .option(
+    '--reset-preferences',
+    formatDesc('Explicitly tell the CLI to reset any stored preferences')
+  )
+  .allowUnknownOption()
+  .parse(process.argv);
 
 const optionsS = program.opts();
 // const packageManager = 'npm';
@@ -27,9 +92,17 @@ const packageManager = optionsS.useNpm
   ? 'bun'
   : getPkgManager();
 
-let projectPath = '';
+// const packageManager = !!program.useNpm
+//   ? 'npm'
+//   : !!program.usePnpm
+//   ? 'pnpm'
+//   : !!program.useYarn
+//   ? 'yarn'
+//   : !!program.useBun
+//   ? 'bun'
+//   : getPkgManager();
 
-export const runWithCommander = async (): Promise<void> => {
+async function run(): Promise<void> {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   /* negate the above */
   const conf = new Conf({ projectName: 'create-node-template' });
@@ -324,21 +397,50 @@ export const runWithCommander = async (): Promise<void> => {
   //   });
   // }
   conf.set('preferences', preferences);
+}
 
+const update = checkForUpdate.default(packageJson).catch(() => null);
+
+async function notifyUpdate(): Promise<void> {
   try {
-    await notifyUpdate(packageManager);
-  } catch (error) {
+    const res = await update;
+    if (res?.latest) {
+      const updateMessage =
+        packageManager === 'yarn'
+          ? 'yarn global add create-next-app'
+          : packageManager === 'pnpm'
+          ? 'pnpm add -g create-next-app'
+          : packageManager === 'bun'
+          ? 'bun add -g create-next-app'
+          : 'npm i -g create-next-app';
+
+      console.log(
+        yellow(bold('A new version of `create-next-app` is available!')) +
+          '\n' +
+          'You can update by running: ' +
+          cyan(updateMessage) +
+          '\n'
+      );
+    }
+    process.exit();
+  } catch {
+    // ignore error
+  }
+}
+
+run()
+  .then(notifyUpdate)
+  .catch(async (reason: { command: string }) => {
     console.log();
     console.log('Aborting installation.');
-    if (error.command) {
-      console.log(`  ${cyan(error.command)} has failed.`);
+    if (reason.command) {
+      console.log(`  ${cyan(reason.command)} has failed.`);
     } else {
-      console.log(red('Unexpected error. Please report it as a bug:') + '\n', error);
+      console.log(red('Unexpected error. Please report it as a bug:') + '\n', reason);
     }
     console.log();
 
-    await notifyUpdate(packageManager);
+    await notifyUpdate();
 
     process.exit(1);
-  }
-};
+  });
