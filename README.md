@@ -1,12 +1,18 @@
 # Create-node-template
 
-<style>
-  .banner {
-    background: radial-gradient(circle, rgba(221, 94, 77, 1) 10%, rgba(40, 41, 43, 1) 100%);
-  }
-</style>
-
 <div align="center" class="banner">
+  <img
+    src="https://github.com/AndyOooh/create-node-template/assets/60953822/7d340216-a4a0-4aec-af00-d724e1e9c446"
+    alt="React Hook Form Logo - React hook custom hook for form validation"
+  />
+  <!-- <img
+    src="https://github.com/AndyOooh/create-node-template/assets/60953822/ee8bc2e6-81ca-479d-83ac-4fbe0ce95104"
+    alt="React Hook Form Logo - React hook custom hook for form validation"
+  /> -->
+
+</div>
+<!-- ![create-node-template-turq](https://github.com/AndyOooh/create-node-template/assets/60953822/7d340216-a4a0-4aec-af00-d724e1e9c446) -->
+<!-- <div align="center" class="banner">
   <img
     src="https://github.com/AndyOooh/create-node-template/assets/60953822/37c52285-cbe3-43c2-a1e8-65c8f449a800"
     alt="React Hook Form Logo - React hook custom hook for form validation"
@@ -14,7 +20,7 @@
   <img
     src="https://github.com/AndyOooh/create-node-template/assets/60953822/087cf649-c56e-4d4c-b686-e8819432c8f6"
   />
-</div>
+</div> -->
 
 <!-- ![node-js-seeklogo](https://github.com/AndyOooh/create-node-template/assets/60953822/37c52285-cbe3-43c2-a1e8-65c8f449a800)
 
