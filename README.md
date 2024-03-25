@@ -5,9 +5,13 @@
   />
 </div>
 
-## Table of Contents
+<!-- ### Description -->
 
-- [Description](#description)
+A CLI template generator for Node.js projects with **modern Typescript configuration**.
+
+### Table of Contents
+
+<!-- - [Description](#description) -->
 - [Prerequisites](#prerequisites)
 - [How to use](#how-to-use)
 - [Features](#features)
@@ -19,9 +23,6 @@
   - [Logging](#logging)
   - [Monitoring (APM - app performance monitoring)](#monitoring-apm---app-performance-monitoring)
 
-### Description
-
-A CLI template generator for Node.js projects with **modern Typescript configuration**.
 
 ### Prerequisites
 
