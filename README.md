@@ -1,42 +1,33 @@
-# Create-node-template
-
 <div align="center" class="banner">
   <img
     src="https://github.com/AndyOooh/create-node-template/assets/60953822/7d340216-a4a0-4aec-af00-d724e1e9c446"
     alt="React Hook Form Logo - React hook custom hook for form validation"
   />
-  <!-- <img
-    src="https://github.com/AndyOooh/create-node-template/assets/60953822/ee8bc2e6-81ca-479d-83ac-4fbe0ce95104"
-    alt="React Hook Form Logo - React hook custom hook for form validation"
-  /> -->
-
 </div>
-<!-- ![create-node-template-turq](https://github.com/AndyOooh/create-node-template/assets/60953822/7d340216-a4a0-4aec-af00-d724e1e9c446) -->
-<!-- <div align="center" class="banner">
-  <img
-    src="https://github.com/AndyOooh/create-node-template/assets/60953822/37c52285-cbe3-43c2-a1e8-65c8f449a800"
-    alt="React Hook Form Logo - React hook custom hook for form validation"
-  />
-  <img
-    src="https://github.com/AndyOooh/create-node-template/assets/60953822/087cf649-c56e-4d4c-b686-e8819432c8f6"
-  />
-</div> -->
-
-<!-- ![node-js-seeklogo](https://github.com/AndyOooh/create-node-template/assets/60953822/37c52285-cbe3-43c2-a1e8-65c8f449a800)
-
-![express-seeklogo](https://github.com/AndyOooh/create-node-template/assets/60953822/087cf649-c56e-4d4c-b686-e8819432c8f6) -->
-
-## Description
-
-This project is a template for creating a new node project. It is a CLI tool that will create a new project with the following features:
 
 ## Table of Contents
 
-## Prerequisites
+- [Description](#description)
+- [Prerequisites](#prerequisites)
+- [How to use](#how-to-use)
+- [Features](#features)
+  - [Node Basic](#node-basic)
+  - [Express Basic](#express-basic)
+  - [Express Advanced](#express-advanced)
+- [References](#references)
+- [Notes](#notes)
+  - [Logging](#logging)
+  - [Monitoring (APM - app performance monitoring)](#monitoring-apm---app-performance-monitoring)
+
+### Description
+
+A CLI template generator for Node.js projects with **modern Typescript configuration**.
+
+### Prerequisites
 
 - Node.js v 16.7.0 or higher (required by experimental `fs.cp` in node-basic)
 
-## How to use
+### How to use
 
 ```
 npx create-node-template <project-name> --flags
@@ -48,9 +39,22 @@ npx create-node-template <project-name> --flags
 
 ## Features
 
+### Node Basic
+
 - Import path aliases.
 - Eslint flat config file (needs VSCode setting).
--
+
+### Express Basic
+
+- all features of node-basic
+- Express server setup
+
+### Express Advanced
+
+- all features of express-basic
+- Express error handling
+- Express logging
+- Express monitoring
 
 ## References
 
@@ -61,6 +65,11 @@ npx create-node-template <project-name> --flags
 - [@typescript-eslint Rules](https://eslint.org/docs/rules/)
 - Create Next App GH repo
 - NPM docs
+
+## Notes
+
+- node-basic uses Experimental fs.cp.
+- VSCode eslint setting for flat config file.
 
 ### Logging
 
@@ -74,8 +83,3 @@ npx create-node-template <project-name> --flags
 - Dynatrace
 - DataDog (recommended)
 - Prometheus
-
-## Notes
-
-- node-basic uses Experimental fs.cp.
-- VSCode eslint setting for flat config file.
