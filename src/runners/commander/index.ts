@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 
 // import { cyan, green, red, yellow, bold, blue } from 'picocolors';
-import { cyan, green, red, yellow, bold } from '@utils/index.js';
+import { cyan, green, red, yellow, bold, unknownHasProperty } from '@utils/index.js';
 import { getPkgManager } from './helpers/get-pkg-manager.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
 import { validateNpmName } from './helpers/validate-pkg.js';
@@ -330,7 +330,8 @@ export const runWithCommander = async (): Promise<void> => {
   } catch (error) {
     console.log();
     console.log('Aborting installation.');
-    if (error.command) {
+
+    if (unknownHasProperty(error, 'command')) {
       console.log(`  ${cyan(error.command)} has failed.`);
     } else {
       console.log(red('Unexpected error. Please report it as a bug:') + '\n', error);
