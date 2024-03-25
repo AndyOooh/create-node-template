@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { Command } from 'commander';
 
 // import { cyan, green, red, yellow, bold, blue } from 'picocolors';
@@ -13,7 +12,7 @@ let projectPath = '';
 
 export const program = new Command(packageJson.name)
   .version(packageJson.version)
-  .arguments('<project-directory>')
+  .arguments('[project-directory]')
   .usage(`${green('<project-directory>')} [options]`)
   .action((name: string) => {
     projectPath = name;

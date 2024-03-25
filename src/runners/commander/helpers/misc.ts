@@ -1,5 +1,6 @@
 import { InitialReturnValue } from 'prompts';
-import checkForUpdate from 'update-check';
+// import checkForUpdate from 'update-check';
+import updateCheck from 'update-check';
 
 import packageJson from '../../../../package.json' with { type: 'json' };
 import { cyan, yellow, bold } from '@utils/index.js';
@@ -27,8 +28,11 @@ export const formatDesc = (description: string): string => {
 
 export const notifyUpdate = async (packageManager: string): Promise<void> => {
   try {
-    const update = checkForUpdate.default(packageJson).catch(() => null);
-    const res = await update;
+    // const update =  checkForUpdate.default(packageJson).catch(() => null);
+    // const update = await checkForUpdate(packageJson)
+    // const res = await update;
+    // const res = await checkForUpdate.default(packageJson);
+    const res = await updateCheck(packageJson);
     if (res?.latest) {
       const updateMessage =
         packageManager === 'yarn'
@@ -48,7 +52,8 @@ export const notifyUpdate = async (packageManager: string): Promise<void> => {
       );
     }
     process.exit();
-  } catch {
+  } catch (error) {
+    const a = 22
     // ignore error
   }
 };
