@@ -6,6 +6,11 @@ import { runWithInquirer } from '@runners/inquirer/index.js';
 import { runWithNode } from '@runners/vanilla-node/index.js';
 import { underline } from '@utils/index.js';
 
+
+const handleSigTerm = () => process.exit(0); // move to utils?
+process.on('SIGINT', handleSigTerm);
+process.on('SIGTERM', handleSigTerm);
+
 /**
  * CLI entry point
  * runMode decides which implementation to run

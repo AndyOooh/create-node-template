@@ -5,13 +5,26 @@
   />
 </div>
 
+<!-- https://shields.io/badges -->
+<!-- style string
+Possible values: [flat, flat-square, plastic, for-the-badge, social] -->
+
+<!-- [![npm bundle size](https://img.shields.io/bundlephobia/min/create-node-template)](https://bundlephobia.com/result?p=create-node-template)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/create-node-template)](https://bundlephobia.com/result?p=create-node-template) -->
+
+[![npm version](https://img.shields.io/npm/v/create-node-template.svg?)](https://www.npmjs.com/package/create-node-template)
+[![install size](https://packagephobia.now.sh/badge?p=create-node-template)](https://packagephobia.now.sh/result?p=create-node-template)
+[![npm type definitions](https://img.shields.io/npm/types/create-node-template.svg)](https://www.npmjs.com/package/create-node-template)
+[![npm downloads](https://img.shields.io/npm/dm/create-node-template.svg?style=plastic)](https://www.npmjs.com/package/create-node-template)
+[![npm](https://img.shields.io/npm/dt/create-node-template.svg?style=plastic)](https://www.npmjs.com/package/create-node-template)
+[![npm](https://img.shields.io/npm/l/create-node-template?style=plastic)](https://github.com/AndyOooh/create-node-template/blob/master/LICENSE)
+
 <!-- ### Description -->
 
 A CLI template generator for Node.js projects with **modern Typescript configuration**.
 
 ### Table of Contents
 
-<!-- - [Description](#description) -->
 - [Prerequisites](#prerequisites)
 - [How to use](#how-to-use)
 - [Features](#features)
@@ -19,14 +32,11 @@ A CLI template generator for Node.js projects with **modern Typescript configura
   - [Express Basic](#express-basic)
   - [Express Advanced](#express-advanced)
 - [References](#references)
-- [Notes](#notes)
-  - [Logging](#logging)
-  - [Monitoring (APM - app performance monitoring)](#monitoring-apm---app-performance-monitoring)
-
 
 ### Prerequisites
 
-- Node.js v 16.7.0 or higher (required by experimental `fs.cp` in node-basic)
+- Node.js v 16.7.0 or higher (required by experimental `fs.cp` in node-basic).
+- [tsx](https://www.npmjs.com/package/tsx) global install recommended.
 
 ### How to use
 
@@ -34,16 +44,14 @@ A CLI template generator for Node.js projects with **modern Typescript configura
 npx create-node-template <project-name> --flags
 ```
 
-1. Select name of project (if not using flag).
-2. Select package manager (npm, yarn, pnpm, bun).
-3. Select template (node-basic, express-basic, express-advanced).
+Arguments and [flags](#flags) are optional.
 
 ## Features
 
 ### Node Basic
 
 - Import path aliases.
-- Eslint flat config file (needs VSCode setting).
+- Eslint flat config file (requires VSCode setting).
 
 ### Express Basic
 
@@ -57,6 +65,11 @@ npx create-node-template <project-name> --flags
 - Express logging
 - Express monitoring
 
+### Flags
+
+- -t, --template
+- -pm. --package-manager
+
 ## References
 
 - [Node.js](https://nodejs.org/en/)
@@ -66,21 +79,3 @@ npx create-node-template <project-name> --flags
 - [@typescript-eslint Rules](https://eslint.org/docs/rules/)
 - Create Next App GH repo
 - NPM docs
-
-## Notes
-
-- node-basic uses Experimental fs.cp.
-- VSCode eslint setting for flat config file.
-
-### Logging
-
-- Morgan
-- Winston
-
-### Monitoring (APM - app performance monitoring)
-
-- New Relic
-- AppDynamics
-- Dynatrace
-- DataDog (recommended)
-- Prometheus

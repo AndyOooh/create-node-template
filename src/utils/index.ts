@@ -1,5 +1,7 @@
 import chalk from 'chalk';
 
+export * from './typescript-utils.js';
+
 export const {
   italic,
   bold,

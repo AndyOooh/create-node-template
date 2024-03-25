@@ -1,8 +1,8 @@
 {
   "name": "create-node-template",
-  "description": "Create node.js/express boilerplate with one command",
+  "description": "Create node.js or express boilerplate with one command",
   "author": "AndyOooh",
-  "version": "0.1.15",
+  "version": "0.1.22",
   "exports": "./src/index.js",
   "type": "module",
   "engines": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AndyOooh/first-npx.git"
+    "url": "git+https://github.com/AndyOooh/create-node-template.git"
   },
   "bin": {
     "create-node-template": "dist/src/index.js"
@@ -58,6 +58,7 @@
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.11.27",
     "@types/prompts": "^2.4.9",
+    "@types/update-notifier": "^6.0.8",
     "@types/validate-npm-package-name": "^4.0.2",
     "commander": "^12.0.0",
     "conf": "^12.0.0",
@@ -65,9 +66,11 @@
     "picocolors": "^1.0.0",
     "prompts": "^2.4.2",
     "resolve-tspaths": "^0.8.18",
+    "simple-update-notifier": "^2.0.0",
     "typescript": "^5.4.2",
     "typescript-eslint": "^7.3.1",
     "update-check": "^1.5.4",
+    "update-notifier": "^7.0.0",
     "validate-npm-package-name": "^5.0.0"
   },
   "dependencies": {
