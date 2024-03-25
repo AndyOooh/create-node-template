@@ -1,6 +1,6 @@
 {
   "name": "create-node-template",
-  "description": "Create node.js/express boilerplate with one command",
+  "description": "Create node.js or express boilerplate with one command",
   "author": "AndyOooh",
   "version": "0.1.21",
   "exports": "./src/index.js",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AndyOooh/first-npx.git"
+    "url": "git+https://github.com/AndyOooh/create-node-template.git"
   },
   "bin": {
     "create-node-template": "dist/src/index.js"
