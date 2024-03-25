@@ -26,24 +26,22 @@ A CLI template generator for Node.js projects with **modern Typescript configura
 
 ### Prerequisites
 
-- Node.js v 16.7.0 or higher (required by experimental `fs.cp` in node-basic)
+- Node.js v 16.7.0 or higher (required by experimental `fs.cp` in node-basic).
+- [tsx](https://www.npmjs.com/package/tsx) global install recommended.
 
 ### How to use
 
 ```
 npx create-node-template <project-name> --flags
 ```
-
-1. Select name of project (if not using flag).
-2. Select package manager (npm, yarn, pnpm, bun).
-3. Select template (node-basic, express-basic, express-advanced).
+Arguments and [flags](#flags) are optional.
 
 ## Features
 
 ### Node Basic
 
 - Import path aliases.
-- Eslint flat config file (needs VSCode setting).
+- Eslint flat config file (requires VSCode setting).
 
 ### Express Basic
 
@@ -56,6 +54,10 @@ npx create-node-template <project-name> --flags
 - Express error handling
 - Express logging
 - Express monitoring
+
+### Flags
+- -t, --template
+- -pm. --package-manager
 
 ## References
 
