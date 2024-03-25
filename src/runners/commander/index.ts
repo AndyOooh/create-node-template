@@ -1,17 +1,14 @@
-import { Command } from 'commander';
 import Conf from 'conf';
-import checkForUpdate from 'update-check';
 import prompts from 'prompts';
 
 import fs from 'fs';
 import path from 'path';
 
 // import { cyan, green, red, yellow, bold, blue } from 'picocolors';
-import { cyan, green, red, yellow, bold, unknownHasProperty } from '@utils/index.js';
+import { cyan, green, red, bold, unknownHasProperty } from '@utils/index.js';
 import { getPkgManager } from './helpers/get-pkg-manager.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
 import { validateNpmName } from './helpers/validate-pkg.js';
-import packageJson from '../../../package.json';
 import { program } from './program.js';
 import { notifyUpdate, onPromptState } from './helpers/misc.js';
 

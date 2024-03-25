@@ -3,7 +3,7 @@ import { Command } from 'commander';
 
 // import { cyan, green, red, yellow, bold, blue } from 'picocolors';
 import { green } from '@utils/index.js';
-import packageJson from '../../../package.json';
+import packageJson from '../../../package.json' with { type: 'json' };
 import { formatDesc } from './helpers/misc.js';
 
 // import { createApp, DownloadError } from './create-app';

@@ -1,8 +1,8 @@
 import { InitialReturnValue } from 'prompts';
 import checkForUpdate from 'update-check';
 
-import packageJson from '../../../../package.json';
-import { cyan, green, red, yellow, bold } from '@utils/index.js';
+import packageJson from '../../../../package.json' with { type: 'json' };
+import { cyan, yellow, bold } from '@utils/index.js';
 
 export const onPromptState = (state: {
   value: InitialReturnValue;
