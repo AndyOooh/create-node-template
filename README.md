@@ -5,12 +5,19 @@
   />
 </div>
 
-[![npm version](https://img.shields.io/npm/v/update-check.svg)](https://www.npmjs.com/package/create-node-template)
-[![install size](https://packagephobia.now.sh/badge?p=update-check)](https://packagephobia.now.sh/result?p=create-node-template)
+<!-- https://shields.io/badges -->
+<!-- style string
+Possible values: [flat, flat-square, plastic, for-the-badge, social] -->
 
-<!-- [![npm downloads](https://img.shields.io/npm/dm/react-hook-form.svg?style=for-the-badge)](https://www.npmjs.com/package/create-node-template)
-[![npm](https://img.shields.io/npm/dt/react-hook-form.svg?style=for-the-badge)](https://www.npmjs.com/package/create-node-template)
-[![npm](https://img.shields.io/npm/l/react-hook-form?style=for-the-badge)](https://github.com/AndyOooh/create-node-template/blob/master/LICENSE) -->
+<!-- [![npm bundle size](https://img.shields.io/bundlephobia/min/create-node-template)](https://bundlephobia.com/result?p=create-node-template)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/create-node-template)](https://bundlephobia.com/result?p=create-node-template) -->
+
+[![npm version](https://img.shields.io/npm/v/create-node-template.svg?)](https://www.npmjs.com/package/create-node-template)
+[![install size](https://packagephobia.now.sh/badge?p=create-node-template)](https://packagephobia.now.sh/result?p=create-node-template)
+[![npm type definitions](https://img.shields.io/npm/types/create-node-template.svg)](https://www.npmjs.com/package/create-node-template)
+[![npm downloads](https://img.shields.io/npm/dm/create-node-template.svg?style=plastic)](https://www.npmjs.com/package/create-node-template)
+[![npm](https://img.shields.io/npm/dt/create-node-template.svg?style=plastic)](https://www.npmjs.com/package/create-node-template)
+[![npm](https://img.shields.io/npm/l/create-node-template?style=plastic)](https://github.com/AndyOooh/create-node-template/blob/master/LICENSE)
 
 <!-- ### Description -->
 
