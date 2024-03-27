@@ -29,88 +29,41 @@ export const runWithCommander = async (): Promise<void> => {
         if (validation.valid) {
           return true;
         }
-        return 'Invalid project name: ' + validation.problems[0];
+        // return 'Invalid project name: ' + validation.problems[0];
+        console.error('Invalid project name. Issue(s): ');
+        validation.problems.forEach(p => console.error(`- ${p}\n`));
+        validation.problems.forEach(p => console.error(`    ${red(bold('*'))} ${p}`));
+        process.exit(1);
       },
     });
-    
 
     if (typeof res.name === 'string') {
       name = res.name.trim();
     }
   }
 
-  const options = program.opts();
-  const { template, importAlias, packageManager, resetPreferences } = options;
+  // const options = program.opts();
+  const { template, importAlias, packageManager, resetPreferences } = program.opts();
 
-  let projectPath: string = name; // remove later
-
-  // if (options.resetPreferences) {
-  //   conf.clear();
-  //   console.log(`Preferences reset successfully`);
-  //   return;
-  // }
-
-  if (typeof projectPath === 'string') {
-    projectPath = projectPath.trim();
+  if (resetPreferences) {
+    conf.clear();
+    console.log(`Preferences reset successfully`);
+    return;
   }
 
-  if (!projectPath) {
-    const res = await prompts({
-      onState: onPromptState,
-      type: 'text',
-      name: 'path',
-      message: 'What is your project named?',
-      initial: 'my-app',
-      validate: (name: string) => {
-        const validation = validateNpmName(path.basename(path.resolve(name)));
-        if (validation.valid) {
-          return true;
-        }
-        return 'Invalid project name: ' + validation.problems[0];
-      },
-    });
-
-    if (typeof res.path === 'string') {
-      projectPath = res.path.trim();
-    }
-  }
-
-  if (!projectPath) {
-    console.log(
-      '\nPlease specify the project directory:\n' +
-        `  ${cyan(program.name())} ${green('<project-directory>')}\n` +
-        'For example:\n' +
-        `  ${cyan(program.name())} ${green('my-next-app')}\n\n` +
-        `Run ${cyan(`${program.name()} --help`)} to see all options.`
-    );
-    process.exit(1);
-  }
-
-  const resolvedProjectPath = path.resolve(projectPath);
+  const resolvedProjectPath = path.resolve(name);
   const projectName = path.basename(resolvedProjectPath);
-
-  const validation = validateNpmName(projectName);
-  if (!validation.valid) {
-    console.error(
-      `Could not create a project called ${red(
-        `"${projectName}"`
-      )} because of npm naming restrictions:`
-    );
-
-    validation.problems.forEach(p => console.error(`    ${red(bold('*'))} ${p}`));
-    process.exit(1);
-  }
 
   /**
    * Verify the project dir is empty or doesn't exist
    */
-  const root = path.resolve(resolvedProjectPath);
-  const appName = path.basename(root);
-  const folderExists = fs.existsSync(root);
-
-  if (folderExists && !isFolderEmpty(root, appName)) {
+  const folderExists = fs.existsSync(resolvedProjectPath);
+  if (folderExists && !isFolderEmpty(resolvedProjectPath, projectName)) {
     process.exit(1);
   }
+
+  // TDOD: prompt for pm
+  // TODO: prompt for template
 
   // const template = typeof options.template === 'string' && options.template.trim();
   const preferences = (conf.get('preferences') || {}) as Record<string, boolean | string>;
@@ -131,6 +84,8 @@ export const runWithCommander = async (): Promise<void> => {
     const getPrefOrDefault = (field: string) => preferences[field] ?? defaults[field];
 
     conf.set('preferences', preferences);
+
+    // TODO: create project.
 
     try {
       // await notifyUpdate(packageManager);

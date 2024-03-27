@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 
 // import { cyan, green, red, yellow, bold, blue } from 'picocolors';
-import { green } from '@utils/index.js';
+import { bold, green, red } from '@utils/index.js';
 import packageJson from '../../../package.json' with { type: 'json' };
 import { formatDesc } from './helpers/misc.js';
 import { validateNpmName } from './helpers/validate-pkg.js';
@@ -20,6 +20,7 @@ export const program = new Command(packageJson.name)
       if (!validation.valid) {
         console.error('Invalid project name. Issue(s): ');
         validation.problems.forEach(p => console.error(`- ${p}\n`));
+        validation.problems.forEach(p => console.error(`    ${red(bold('*'))} ${p}`));
         process.exit(1);
       }
     }
