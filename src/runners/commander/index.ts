@@ -15,13 +15,34 @@ export const runWithCommander = async (): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   /* negate the above */
   const conf = new Conf({ projectName: 'create-node-template' });
-  const name = program.processedArgs[0];
+  let name = program.processedArgs[0] as string;
   //  trim and check name
+  if (!name?.trim()) {
+    const res = await prompts({
+      onState: onPromptState,
+      type: 'text',
+      name: 'name',
+      message: 'What is your project namedPPPP?',
+      initial: 'my-app',
+      validate: (name: string) => {
+        const validation = validateNpmName(path.basename(path.resolve(name)));
+        if (validation.valid) {
+          return true;
+        }
+        return 'Invalid project name: ' + validation.problems[0];
+      },
+    });
+    
+
+    if (typeof res.name === 'string') {
+      name = res.name.trim();
+    }
+  }
 
   const options = program.opts();
-  const { importAlias, useNpm } = options;
+  const { template, importAlias, packageManager, resetPreferences } = options;
 
-  let projectPath: string = name;
+  let projectPath: string = name; // remove later
 
   // if (options.resetPreferences) {
   //   conf.clear();
@@ -91,7 +112,7 @@ export const runWithCommander = async (): Promise<void> => {
     process.exit(1);
   }
 
-  const template = typeof options.template === 'string' && options.template.trim();
+  // const template = typeof options.template === 'string' && options.template.trim();
   const preferences = (conf.get('preferences') || {}) as Record<string, boolean | string>;
   /**
    * If the user does not provide the necessary flags, prompt them for whether

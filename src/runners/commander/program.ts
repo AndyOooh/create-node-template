@@ -11,39 +11,37 @@ import { validateNpmName } from './helpers/validate-pkg.js';
 
 export const program = new Command(packageJson.name)
   .version(packageJson.version)
-  .arguments('[project-directory]') // [] means optional, <> means required
-  .usage(`${green('<project-directory>')} [options]`)
+  .arguments('[project-name]') // [] means optional, <> means required
+  .usage(`${green('<project-name>')} [options]`)
   .action((name: string) => {
     const nameTrimmed = name?.trim();
     if (nameTrimmed) {
-      const npmNameValidationRes = validateNpmName(nameTrimmed);
-      if (!npmNameValidationRes.valid) {
+      const validation = validateNpmName(nameTrimmed);
+      if (!validation.valid) {
         console.error('Invalid project name. Issue(s): ');
-        npmNameValidationRes.problems.forEach((p) => console.error(`- ${p}\n`));
+        validation.problems.forEach(p => console.error(`- ${p}\n`));
         process.exit(1);
       }
     }
-
-    console.log('🚀  name:', name);
   })
   // .option('--eslint', formatDesc('Initialize with eslint config.'))
   .option(
     '-t, --template [name]',
     formatDesc(
       'Which template to bootstrap the app with. You can use any of:\n' +
-      '  - node-basic: A basic Node.js app.\n' +
-      '  - express-basic: A basic Express.js app.\n' +
-      '  - express-advanced: An advanced Express.js app with ready for production.'
+        '  - node-basic: A basic Node.js app.\n' +
+        '  - express-basic: A basic Express.js app.\n' +
+        '  - express-advanced: An advanced Express.js app with ready for production.'
     )
   )
   .option(
     '-pm, --package-manager [name]',
     formatDesc(
       'Which package manager to use. You can select any of:\n' +
-      '  - npm.\n' +
-      '  - yarn.\n' +
-      '  - pnpm.\n' +
-      '  - bun.'
+        '  - npm.\n' +
+        '  - yarn.\n' +
+        '  - pnpm.\n' +
+        '  - bun.'
     )
   )
   .option(

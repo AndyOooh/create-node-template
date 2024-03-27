@@ -14,7 +14,7 @@
     "url": "git+https://github.com/AndyOooh/create-node-template.git"
   },
   "bin": {
-    "create-node-template": "dist/src/index.js"
+    "create-nodelala22": "dist/src/index.js"
   },
   "files": [
     "dist/",
@@ -47,7 +47,8 @@
   "scripts": {
     "build": "tsc && resolve-tspaths",
     "copy-templates": "cp -r templates dist/",
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsc -w src/index.ts",
+    "dev:start": "tsx watch src/index.ts",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "publish:patch": "bun run build && bun run copy-templates && npm version patch && npm publish --registry=https://registry.npmjs.org/",
