@@ -15,9 +15,12 @@ export const runWithCommander = async (): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   /* negate the above */
   const conf = new Conf({ projectName: 'create-node-template' });
+  const name = program.processedArgs[0];
+  //  trim and check name
 
   const options = program.opts();
-  const { importAlias, useNpm, name } = options;
+  const { importAlias, useNpm } = options;
+
   let projectPath: string = name;
 
   // if (options.resetPreferences) {
