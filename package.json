@@ -14,7 +14,7 @@
     "url": "git+https://github.com/AndyOooh/create-node-template.git"
   },
   "bin": {
-    "create-nodelala22": "dist/src/index.js"
+    "create-node-template": "dist/src/index.js"
   },
   "files": [
     "dist/",
@@ -45,9 +45,10 @@
     "prettier"
   ],
   "scripts": {
-    "build": "tsc && resolve-tspaths",
+    "build": "tsc && tsc-alias",
+    "build:watch": "tsc --watch & tsc-alias --watch",
     "copy-templates": "cp -r templates dist/",
-    "dev": "tsc -w src/index.ts",
+    "dev": "tsc -w && resolve-tspaths --verbose",
     "dev:start": "tsx watch src/index.ts",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
@@ -68,6 +69,7 @@
     "prompts": "^2.4.2",
     "resolve-tspaths": "^0.8.18",
     "simple-update-notifier": "^2.0.0",
+    "tsc-alias": "^1.8.8",
     "typescript": "^5.4.2",
     "typescript-eslint": "^7.3.1",
     "update-check": "^1.5.4",

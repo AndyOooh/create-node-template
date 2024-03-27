@@ -22,7 +22,7 @@ export const runWithCommander = async (): Promise<void> => {
       onState: onPromptState,
       type: 'text',
       name: 'name',
-      message: 'What is your project namedPPPP?',
+      message: 'What is your project named?',
       initial: 'my-app',
       validate: (name: string) => {
         const validation = validateNpmName(path.basename(path.resolve(name)));
