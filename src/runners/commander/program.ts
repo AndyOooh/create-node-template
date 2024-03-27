@@ -8,30 +8,15 @@ import { formatDesc } from './helpers/misc.js';
 // import { createApp, DownloadError } from './create-app';
 // import ciInfo from 'ci-info';
 
-let projectPath = '';
-
 export const program = new Command(packageJson.name)
   .version(packageJson.version)
-  .arguments('[project-directory]')
+  .arguments('[project-directory]') // [] means optional, <> means required
   .usage(`${green('<project-directory>')} [options]`)
   .action((name: string) => {
-    projectPath = name;
+    console.log('🚀  name:', name);
+    // projectPath = name;
   })
-  .option('--eslint', formatDesc('Initialize with eslint config.'))
-  .option(
-    '--import-alias <alias-to-configure>',
-    formatDesc('Specify import alias to use (default "@/*").')
-  )
-  .option('--use-npm', formatDesc('Explicitly tell the CLI to bootstrap the application using npm'))
-  .option(
-    '--use-pnpm',
-    formatDesc('Explicitly tell the CLI to bootstrap the application using pnpm')
-  )
-  .option(
-    '--use-yarn',
-    formatDesc('Explicitly tell the CLI to bootstrap the application using Yarn')
-  )
-  .option('--use-bun', formatDesc('Explicitly tell the CLI to bootstrap the application using Bun'))
+  // .option('--eslint', formatDesc('Initialize with eslint config.'))
   .option(
     '-t, --template [name]',
     formatDesc(
@@ -40,6 +25,20 @@ export const program = new Command(packageJson.name)
         '  - express-basic: A basic Express.js app.\n' +
         '  - express-advanced: An advanced Express.js app with ready for production.'
     )
+  )
+  .option(
+    '-pm, --package-manager [name]',
+    formatDesc(
+      'Which package manager to use. You can select any of:\n' +
+        '  - npm.\n' +
+        '  - yarn.\n' +
+        '  - pnpm.\n' +
+        '  - bun.'
+    )
+  )
+  .option(
+    '--import-alias <alias-to-configure>',
+    formatDesc('Specify import alias to use (default "@/*").')
   )
   .option(
     '--reset-preferences',
