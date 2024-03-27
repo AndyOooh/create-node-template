@@ -1,10 +1,7 @@
 import { InitialReturnValue } from 'prompts';
-// import updateCheck from 'update-check';
-
 import updateNotifier from 'update-notifier';
 
 import packageJson from '../../../../package.json' with { type: 'json' }; // prettier cant handle this
-// import { cyan, yellow, bold } from '@utils/index.js';
 
 export const onPromptState = (state: {
   value: InitialReturnValue;

@@ -5,17 +5,15 @@ import fs from 'fs';
 import path from 'path';
 
 import { cyan, green, red, bold, unknownHasProperty } from '@utils/index.js';
-// import { getPkgManager } from './helpers/get-pkg-manager.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
 import { validateNpmName } from './helpers/validate-pkg.js';
 import { program } from './program.js';
 import { notifyUpdate, onPromptState } from './helpers/misc.js';
 
 export const runWithCommander = async (): Promise<void> => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  /* negate the above */
   const conf = new Conf({ projectName: 'create-node-template' });
   let name = program.processedArgs[0] as string;
+
   //  trim and check name
   if (!name?.trim()) {
     const res = await prompts({
@@ -62,8 +60,53 @@ export const runWithCommander = async (): Promise<void> => {
     process.exit(1);
   }
 
+  let packMan = packageManager;
+  if (!packageManager) {
+    const res = await prompts({
+      onState: onPromptState,
+      type: 'select',
+      name: 'packageManager',
+      message: 'Which package manager do you want to use?',
+      choices: [
+        { title: 'npm', value: 'npm' },
+        { title: 'yarn', value: 'yarn' },
+        { title: 'pnpm', value: 'pnpm' },
+        { title: 'bun', value: 'bun' },
+      ],
+      // validate: (pm: string) => {
+      //   if (['npm', 'yarn', 'pnpm', 'bun'].includes(pm)) {
+      //     return true;
+      //   }
+      //   return 'Invalid package manager';
+      //   // process.exit(1);
+      // },
+    });
+
+    if (typeof res.packageManager === 'string') {
+      packMan = res.packageManager;
+    }
+  }
   // TDOD: prompt for pm
   // TODO: prompt for template
+
+  let temp = template;
+  if (!template) {
+    const res = await prompts({
+      onState: onPromptState,
+      type: 'select',
+      name: 'template',
+      message: 'Which template do you want to use?',
+      choices: [
+        { title: 'node-basic', value: 'node-basic' },
+        { title: 'express-basic', value: 'express-basic' },
+        { title: 'express-advanced', value: 'express-advanced' },
+      ],
+    });
+
+    if (typeof res.template === 'string') {
+      temp = res.template;
+    }
+  }
 
   // const template = typeof options.template === 'string' && options.template.trim();
   const preferences = (conf.get('preferences') || {}) as Record<string, boolean | string>;
