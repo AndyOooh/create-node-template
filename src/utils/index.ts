@@ -1,14 +1,10 @@
 import chalk from 'chalk';
 
-import * as path from 'path';
-// import path from 'path';
-import * as fs from 'node:fs/promises';
+import { join } from 'path';
+import { readFile, writeFile } from 'node:fs/promises';
 
-import * as util from 'util';
-// import * as readline from 'node:readline/promises';
+import { promisify } from 'util';
 import { exec } from 'node:child_process';
-// import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index.js';
-// import { blue, cyan, green, italic, magenta, red, underline, yellow } from '@utils/index.js';
 export * from './typescript-utils.js';
 
 export const {
@@ -29,10 +25,10 @@ export const {
  *
  */
 export const renameProject = async (projectName: string, destPath: string) => {
-  const packageJsonPath = path.join(destPath, 'package.json');
-  const packageJson = await fs.readFile(packageJsonPath, 'utf-8');
+  const packageJsonPath = join(destPath, 'package.json');
+  const packageJson = await readFile(packageJsonPath, 'utf-8');
   const newPackageJson = packageJson.replace(/"name": ".*"/, `"name": "${projectName}"`);
-  await fs.writeFile(packageJsonPath, newPackageJson);
+  await writeFile(packageJsonPath, newPackageJson);
 };
 
 /*
@@ -48,7 +44,7 @@ export const installCommandMap = {
 /*
  * Execute command asynchronusly
  */
-export const execPromise = util.promisify(exec);
+export const execPromise = promisify(exec);
 
 /*
  *
