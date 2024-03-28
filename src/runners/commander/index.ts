@@ -5,7 +5,7 @@ import { cyan, red, unknownHasProperty } from '@utils/index.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
 import { program } from './program.js';
 import { notifyUpdate } from './helpers/misc.js';
-import { getPackageManager, getProjectName, getTemplate } from './prompts.js';
+import { getPackageManager, getProjectName, getTemplate } from './helpers/prompts.js';
 import { CliOptions } from '@config/index.js';
 import { createApp } from './createApp.js';
 

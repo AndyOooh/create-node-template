@@ -1,8 +1,8 @@
 import prompts from 'prompts';
 import path from 'path';
 
-import { validateNpmName } from './helpers/validate-pkg.js';
-import { onPromptState } from './helpers/misc.js';
+import { validateNpmName } from './validate-pkg.js';
+import { onPromptState } from './misc.js';
 import { bold, red } from '@utils/index.js';
 import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index.js';
 
