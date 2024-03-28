@@ -5,7 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 import { promisify } from 'util';
 import { exec } from 'node:child_process';
-import { Template } from '@config/index.js';
+import { PackageManager, Template } from '@config/index.js';
 export * from './typescript-utils.js';
 
 export const {
@@ -79,4 +79,11 @@ ${emoji} ${green('Success!')} Created new project ${yellow.bold(
 ${cyan(hashString)}
 `;
   return successString;
+};
+
+export const logRecNextSteps = (projectName: string, packageManger: PackageManager) => {
+  console.log(`Recommended next steps:`);
+  console.log(`1. ${cyan(`cd ${projectName}`)}`);
+  console.log(`2. ${cyan('code .')} (VSCode)`);
+  console.log(`3. ${cyan(packageManger === 'yarn' ? 'yarn dev' : `${packageManger} run dev`)}\n`);
 };

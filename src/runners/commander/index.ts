@@ -1,7 +1,7 @@
 import { existsSync } from 'fs';
 import { basename, resolve } from 'path';
 
-import { cyan, getSuccessString, red, unknownHasProperty } from '@utils/index.js';
+import { cyan, getSuccessString, logRecNextSteps, red, unknownHasProperty } from '@utils/index.js';
 import { CliOptions } from '@config/index.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
 import { notifyUpdate } from './helpers/misc.js';
@@ -51,12 +51,7 @@ export const runWithCommander = async (): Promise<void> => {
     const succesString = getSuccessString(projectName, temp);
     console.log(succesString);
 
-    console.log(`Recommended next steps:`);
-    console.log(`1. ${cyan(`cd ${projectName}`)}`);
-    console.log(`2. ${cyan('code .')} (VSCode)`);
-    console.log(
-      `3. ${cyan(packageManager === 'yarn' ? 'yarn dev' : `${packageManager} run dev`)}\n`
-    );
+    logRecNextSteps(projectName, pm);
 
     notifyUpdate();
   } catch (error) {
