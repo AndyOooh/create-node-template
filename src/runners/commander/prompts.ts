@@ -4,8 +4,9 @@ import path from 'path';
 import { validateNpmName } from './helpers/validate-pkg.js';
 import { onPromptState } from './helpers/misc.js';
 import { bold, red } from '@utils/index.js';
+import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index.js';
 
-export const getProjectName = async (arg1: string) => {
+export const getProjectName = async (arg1: string): Promise<string> => {
   let projectName = arg1;
 
   if (!projectName) {
@@ -34,58 +35,44 @@ export const getProjectName = async (arg1: string) => {
   return projectName;
 };
 
-export const getPackageManager = async (pm: string) => {
-  let packageManager = pm;
-
-  if (!packageManager) {
-    const res = await prompts({
-      onState: onPromptState,
-      type: 'select',
-      name: 'packageManager',
-      message: 'Which package manager do you want to use?',
-      choices: [
-        { title: 'npm', value: 'npm' },
-        { title: 'yarn', value: 'yarn' },
-        { title: 'pnpm', value: 'pnpm' },
-        { title: 'bun', value: 'bun' },
-      ],
-      /* No need for validation */
-      // validate: (pm: string) => {
-      //   if (['npm', 'yarn', 'pnpm', 'bun'].includes(pm)) {
-      //     return true;
-      //   }
-      //   return 'Invalid package manager';
-      //   // process.exit(1);
-      // },
-    });
-
-    if (typeof res.packageManager === 'string') {
-      packageManager = res.packageManager;
-    }
+export const getPackageManager = async (pm: string): Promise<PackageManager> => {
+  if (supportedPMs.includes(pm as PackageManager)) {
+    return pm as PackageManager;
   }
+  const { packageManager }: { packageManager: PackageManager } = await prompts({
+    onState: onPromptState,
+    type: 'select',
+    name: 'packageManager',
+    message: 'Which package manager do you want to use?',
+    choices: [
+      { title: 'npm', value: 'npm' },
+      { title: 'yarn', value: 'yarn' },
+      { title: 'pnpm', value: 'pnpm' },
+      { title: 'bun', value: 'bun' },
+    ],
+    /* No need for validation */
+  });
+
   return packageManager;
 };
 
-export const getTemplate = async (temp: string) => {
-  let template = temp;
-
-  if (!template) {
-    const res = await prompts({
-      onState: onPromptState,
-      type: 'select',
-      name: 'template',
-      message: 'Which template do you want to use?',
-      choices: [
-        { title: 'node-basic', value: 'node-basic' },
-        { title: 'express-basic', value: 'express-basic' },
-        { title: 'express-advanced', value: 'express-advanced' },
-      ],
-      /* No need for validation */
-    });
-
-    if (typeof res.template === 'string') {
-      template = res.template;
-    }
+export const getTemplate = async (temp: string): Promise<Template> => {
+  if (supportedTemplates.includes(temp as Template)) {
+    return temp as Template;
   }
+
+  const { template }: { template: Template } = await prompts({
+    onState: onPromptState,
+    type: 'select',
+    name: 'template',
+    message: 'Which template do you want to use?',
+    choices: [
+      { title: 'node-basic', value: 'node-basic' },
+      { title: 'express-basic', value: 'express-basic' },
+      { title: 'express-advanced', value: 'express-advanced' },
+    ],
+    /* No need for validation */
+  });
+
   return template;
 };

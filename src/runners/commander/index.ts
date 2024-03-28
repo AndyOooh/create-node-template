@@ -1,4 +1,3 @@
-
 import fs from 'fs';
 import path from 'path';
 
@@ -11,7 +10,7 @@ import { CliOptions } from './types.js';
 
 export const runWithCommander = async (): Promise<void> => {
   // const conf = new Conf({ projectName: 'create-node-template' });
-  const nameOrEmptyString = (program.processedArgs[0] as string).trim() || '';
+  const nameOrEmptyString = (program.processedArgs[0] as string) || '';
 
   /* trim and check name */
   const name = await getProjectName(nameOrEmptyString);
