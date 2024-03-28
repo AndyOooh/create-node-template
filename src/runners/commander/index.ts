@@ -2,11 +2,11 @@ import { existsSync } from 'fs';
 import { basename, resolve } from 'path';
 
 import { cyan, getSuccessString, red, unknownHasProperty } from '@utils/index.js';
+import { CliOptions } from '@config/index.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
-import { program } from './program.js';
 import { notifyUpdate } from './helpers/misc.js';
 import { getPackageManager, getProjectName, getTemplate } from './helpers/prompts.js';
-import { CliOptions } from '@config/index.js';
+import { program } from './program.js';
 import { createApp } from './createApp.js';
 
 export const runWithCommander = async (): Promise<void> => {
