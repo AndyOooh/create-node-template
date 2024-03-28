@@ -16,13 +16,16 @@ type Props = {
 
 export const createApp = async ({
   projectName,
-  projectPath,
+  //   projectPath,
   template,
   packageManager,
   importAlias,
 }: Props): Promise<void> => {
   try {
-    if (!(await isWriteable(path.dirname(projectPath)))) {
+    const cwd = process.cwd(); // path to current working directory (shell. not including the source code file path)
+    const destPath = path.join(cwd, projectName);
+
+    if (!(await isWriteable(path.dirname(destPath)))) {
       console.error(
         'The application path is not writable, please check folder permissions and try again.'
       );
@@ -31,13 +34,10 @@ export const createApp = async ({
     }
 
     const __dirname = import.meta.dirname; // path to current file (not iuncluding the file name)
-    const cwd = process.cwd(); // path to current working directory (shell. not including the source code file path)
-
     const templatesPath = path.resolve(__dirname, '../../../templates');
-
-    /* Create paths and copy template to destination*/
-    const destPath = projectName ? path.join(cwd, projectName) : cwd;
     const templatePath = path.join(templatesPath, template);
+
+    /* Copy template to destination*/
     await fs.cp(templatePath, destPath, { recursive: true });
 
     /* Modify package.json.name */

@@ -47,6 +47,7 @@
   "scripts": {
     "build": "tsc && tsc-alias",
     "build:watch": "tsc --watch & tsc-alias --watch",
+    "clean-templates": "./clean-templates.sh",
     "copy-templates": "cp -r templates dist/",
     "lint": "bunx eslint .",
     "lint:fix": "bunx eslint . --fix",
