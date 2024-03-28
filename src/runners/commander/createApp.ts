@@ -6,9 +6,8 @@ import { isWriteable } from './helpers/misc.js';
 import { cyan, green, installCommandMap, renameProject, runCmd } from '@utils/index.js';
 import { getSuccessString } from '@runners/vanilla-node/utils.js';
 
-type Props = {
+type CreateAppParams = {
   projectName: string;
-  projectPath: string;
   template: Template;
   packageManager: PackageManager;
   importAlias?: string;
@@ -16,11 +15,10 @@ type Props = {
 
 export const createApp = async ({
   projectName,
-  //   projectPath,
   template,
   packageManager,
   importAlias,
-}: Props): Promise<void> => {
+}: CreateAppParams): Promise<void> => {
   try {
     const cwd = process.cwd(); // path to current working directory (shell. not including the source code file path)
     const destPath = path.join(cwd, projectName);

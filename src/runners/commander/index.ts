@@ -53,7 +53,6 @@ export const runWithCommander = async (): Promise<void> => {
   try {
     await createApp({
       projectName,
-      projectPath,
       template: temp,
       packageManager: pm,
       importAlias,
