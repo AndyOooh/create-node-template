@@ -2,7 +2,7 @@
   "name": "create-node-template",
   "description": "Create node.js or express boilerplate with one command",
   "author": "AndyOooh",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "exports": "./src/index.js",
   "type": "module",
   "engines": {
