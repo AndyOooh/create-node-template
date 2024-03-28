@@ -7,6 +7,7 @@ import { program } from './program.js';
 import { notifyUpdate } from './helpers/misc.js';
 import { getPackageManager, getProjectName, getTemplate } from './prompts.js';
 import { CliOptions } from '@config/index.js';
+import { createApp } from './createApp.js';
 
 export const runWithCommander = async (): Promise<void> => {
   // const conf = new Conf({ projectName: 'create-node-template' });
@@ -25,15 +26,15 @@ export const runWithCommander = async (): Promise<void> => {
   /**
    * Verify the project dir is empty if it already exists
    */
-  const resolvedProjectPath = path.resolve(name);
-  const projectName = path.basename(resolvedProjectPath);
-  const folderExists = fs.existsSync(resolvedProjectPath);
-  if (folderExists && !isFolderEmpty(resolvedProjectPath, projectName)) {
+  const projectPath = path.resolve(name);
+  const projectName = path.basename(projectPath);
+  const folderExists = fs.existsSync(projectPath);
+  if (folderExists && !isFolderEmpty(projectPath, projectName)) {
     console.log('Please make sure the directory is empty before proceeding.');
     process.exit(1);
   }
 
-  const pm = getPackageManager(packageManager);
+  const pm = await getPackageManager(packageManager);
   const temp = await getTemplate(template);
 
   // const preferences = (conf.get('preferences') || {}) as Record<string, boolean | string>;
@@ -50,7 +51,13 @@ export const runWithCommander = async (): Promise<void> => {
   // TODO: create project.
 
   try {
-    // await notifyUpdate(packageManager);
+    await createApp({
+      projectName,
+      projectPath,
+      template: temp,
+      packageManager: pm,
+      importAlias,
+    });
     notifyUpdate();
   } catch (error) {
     console.log();

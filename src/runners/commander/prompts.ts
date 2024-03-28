@@ -6,6 +6,9 @@ import { onPromptState } from './helpers/misc.js';
 import { bold, red } from '@utils/index.js';
 import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index.js';
 
+/*
+ *
+ */
 export const getProjectName = async (arg1: string): Promise<string> => {
   let projectName = arg1;
 
@@ -35,6 +38,9 @@ export const getProjectName = async (arg1: string): Promise<string> => {
   return projectName;
 };
 
+/*
+ *
+ */
 export const getPackageManager = async (pm: string): Promise<PackageManager> => {
   if (supportedPMs.includes(pm as PackageManager)) {
     return pm as PackageManager;
@@ -56,6 +62,9 @@ export const getPackageManager = async (pm: string): Promise<PackageManager> => 
   return packageManager;
 };
 
+/*
+ *
+ */
 export const getTemplate = async (temp: string): Promise<Template> => {
   if (supportedTemplates.includes(temp as Template)) {
     return temp as Template;
