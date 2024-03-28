@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc && tsc-alias",
     "build:watch": "tsc -w & tsc-alias --watch",
-    "dev": "tsx -w src/server.ts",
+    "dev": "tsx watch src/server.ts",
     "dev:start": "tsx dist/server.js",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix"
