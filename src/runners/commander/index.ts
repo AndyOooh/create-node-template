@@ -48,7 +48,7 @@ export const runWithCommander = async (): Promise<void> => {
       packageManager: pm,
       importAlias,
     });
-    const succesString = getSuccessString(projectName, template);
+    const succesString = getSuccessString(projectName, temp);
     console.log(succesString);
 
     console.log(`Recommended next steps:`);

@@ -5,6 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 import { promisify } from 'util';
 import { exec } from 'node:child_process';
+import { Template } from '@config/index.js';
 export * from './typescript-utils.js';
 
 export const {
@@ -62,7 +63,7 @@ export const runCmd = async (command: string): Promise<void> => {
 /*
  *
  */
-export const getSuccessString = (projectName: string, template: string) => {
+export const getSuccessString = (projectName: string, template: Template) => {
   const emoji = '🦉';
   const chars = 53;
   const extraChars = projectName.length + template.length;
