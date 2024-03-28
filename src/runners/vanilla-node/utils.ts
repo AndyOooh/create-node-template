@@ -4,25 +4,17 @@ import * as fs from 'node:fs/promises';
 import path from 'path';
 import { exec } from 'node:child_process';
 import { PackageManager, Template, supportedPMs, supportedTemplates } from '@config/index.js';
-import { blue, cyan, green, italic, magenta, red, underline, yellow } from '@utils/index.js';
-
-/*
- * Execute command asynchronusly
- */
-const execPromise = util.promisify(exec);
-
-/*
- *
- */
-export const runCmd = async (command: string): Promise<void> => {
-  try {
-    const { stdout, stderr } = await execPromise(command);
-    console.log(stdout);
-    console.log(stderr);
-  } catch (error) {
-    console.log(error);
-  }
-};
+import {
+  blue,
+  cyan,
+  execPromise,
+  green,
+  italic,
+  magenta,
+  red,
+  underline,
+  yellow,
+} from '@utils/index.js';
 
 /*
  *
@@ -31,16 +23,6 @@ export const readlinePromise = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-
-/*
- * Used to map package managers to their install commands
- */
-export const installCommandMap = {
-  npm: 'npm install',
-  yarn: 'yarn',
-  pnpm: 'pnpm install',
-  bun: 'bun install',
-};
 
 /*
  * Used with process.argv[2] to get project name
@@ -128,39 +110,3 @@ export const getTemplate = async (name?: string): Promise<Template> => {
   console.log(`Creating project with template: ${yellow(template)} \n`);
   return template;
 };
-
-/*
- *
- */
-export const renameProject = async (projectName: string, destPath: string) => {
-  const packageJsonPath = path.join(destPath, 'package.json');
-  const packageJson = await fs.readFile(packageJsonPath, 'utf-8');
-  const newPackageJson = packageJson.replace(/"name": ".*"/, `"name": "${projectName}"`);
-  await fs.writeFile(packageJsonPath, newPackageJson);
-};
-
-/*
- *
- */
-export const getSuccessString = (projectName: string, template: string) => {
-  const emoji = '🦉';
-  const chars = 53;
-  const extraChars = projectName.length + template.length;
-  const hashString = Array.from({ length: extraChars + chars })
-    .map(el => '#')
-    .join('');
-
-  const successString = `
-${cyan(hashString)}
-${emoji} ${green('Success!')} Created new project ${yellow.bold(
-    projectName
-  )} using template: ${yellow.italic(template)} ${emoji}
-${cyan(hashString)}
-`;
-  return successString;
-};
-
-/* Test */
-// const projectName = 'my-new-project';
-// const template = 'node-basic';
-// console.log(getSuccessString(projectName, template));

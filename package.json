@@ -2,7 +2,7 @@
   "name": "create-node-template",
   "description": "Create node.js or express boilerplate with one command",
   "author": "AndyOooh",
-  "version": "0.1.22",
+  "version": "0.1.27",
   "exports": "./src/index.js",
   "type": "module",
   "engines": {
@@ -47,9 +47,12 @@
   "scripts": {
     "build": "tsc && tsc-alias",
     "build:watch": "tsc --watch & tsc-alias --watch",
+    "clean-templates": "./clean-templates.sh",
     "copy-templates": "cp -r templates dist/",
-    "lint": "bunx eslint .",
-    "lint:fix": "bunx eslint . --fix",
+    "lint": "bunx eslint . --ignore-pattern 'templates'",
+    "lint:all": "bunx eslint .",
+    "lint:fix": "bunx eslint . --fix --ignore-pattern 'templates'",
+    "lint:fix-all": "bunx eslint . --fix",
     "publish:patch": "bun run build && bun run copy-templates && npm version patch && npm publish --registry=https://registry.npmjs.org/",
     "start": "node dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -65,7 +68,6 @@
     "eslint": "^8.57.0",
     "picocolors": "^1.0.0",
     "prompts": "^2.4.2",
-    "resolve-tspaths": "^0.8.18",
     "simple-update-notifier": "^2.0.0",
     "tsc-alias": "^1.8.8",
     "typescript": "^5.4.2",

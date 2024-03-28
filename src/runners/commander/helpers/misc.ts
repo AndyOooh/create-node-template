@@ -1,3 +1,5 @@
+import * as fs from 'node:fs/promises';
+
 import { InitialReturnValue } from 'prompts';
 import updateNotifier from 'update-notifier';
 
@@ -17,7 +19,7 @@ export const onPromptState = (state: {
   }
 };
 
-export const formatDesc = (description: string): string => {
+export const formatOptionDescription = (description: string): string => {
   return `
 
       ${description}
@@ -34,3 +36,15 @@ export const notifyUpdate = (): void => {
     // ignore error
   }
 };
+
+
+
+
+export async function isWriteable(directory: string): Promise<boolean> {
+  try {
+    await fs.access(directory, (fs.constants || fs).W_OK)
+    return true
+  } catch (err) {
+    return false
+  }
+}
