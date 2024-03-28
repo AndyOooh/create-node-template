@@ -6,7 +6,7 @@ import { isFolderEmpty } from './helpers/is-folder-empty.js';
 import { program } from './program.js';
 import { notifyUpdate } from './helpers/misc.js';
 import { getPackageManager, getProjectName, getTemplate } from './prompts.js';
-import { CliOptions } from './types.js';
+import { CliOptions } from '@config/index.js';
 
 export const runWithCommander = async (): Promise<void> => {
   // const conf = new Conf({ projectName: 'create-node-template' });
