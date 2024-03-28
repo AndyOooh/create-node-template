@@ -63,7 +63,9 @@ export const runWithCommander = async (): Promise<void> => {
     console.log(`Recommended next steps:`);
     console.log(`1. ${cyan(`cd ${projectName}`)}`);
     console.log(`2. ${cyan('code .')} (VSCode)`);
-    console.log(`3. ${cyan(`tsx run dev`)}\n`);
+    console.log(
+      `3. ${cyan(packageManager === 'yarn' ? 'yarn dev' : `${packageManager} run dev`)}\n`
+    );
 
     notifyUpdate();
   } catch (error) {
