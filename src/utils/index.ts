@@ -68,7 +68,7 @@ export const getSuccessString = (projectName: string, template: Template) => {
   const chars = 53;
   const extraChars = projectName.length + template.length;
   const hashString = Array.from({ length: extraChars + chars })
-    .map(el => '#')
+    .map(_el => '#')
     .join('');
 
   const successString = `
