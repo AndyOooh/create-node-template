@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import { existsSync } from 'fs';
+import { basename, resolve } from 'path';
 
 import { cyan, getSuccessString, red, unknownHasProperty } from '@utils/index.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
@@ -26,9 +26,9 @@ export const runWithCommander = async (): Promise<void> => {
   /**
    * Verify the project dir is empty if it already exists
    */
-  const projectPath = path.resolve(name);
-  const projectName = path.basename(projectPath);
-  const folderExists = fs.existsSync(projectPath);
+  const projectPath = resolve(name);
+  const projectName = basename(projectPath);
+  const folderExists = existsSync(projectPath);
   if (folderExists && !isFolderEmpty(projectPath, projectName)) {
     console.log('Please make sure the directory is empty before proceeding.');
     process.exit(1);
@@ -38,17 +38,8 @@ export const runWithCommander = async (): Promise<void> => {
   const temp = await getTemplate(template);
 
   // const preferences = (conf.get('preferences') || {}) as Record<string, boolean | string>;
-
-  /**
-   * If the user does not provide the necessary flags, prompt them for whether
-   * to use TS or JS.
-   */
-
   // const getPrefOrDefault = (field: string) => preferences[field] ?? defaults[field];
-
   // conf.set('preferences', preferences);
-
-  // TODO: create project.
 
   try {
     await createApp({
