@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fs from 'node:fs/promises';
-import { getPackageManager, getProjectName, getSuccessString, getTemplate } from './utils.js';
-import { cyan, green, installCommandMap, renameProject, runCmd } from '@utils/index.js';
+import { getPackageManager, getProjectName, getTemplate } from './utils.js';
+import { cyan, getSuccessString, green, installCommandMap, renameProject, runCmd } from '@utils/index.js';
 
 export const runWithNode = async () => {
   try {

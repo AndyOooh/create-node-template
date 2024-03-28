@@ -1,10 +1,9 @@
-import * as path from 'path';
-import * as fs from 'node:fs/promises';
+import { join, dirname, resolve } from 'path';
+import { cp } from 'node:fs/promises';
 
 import { PackageManager, Template } from '@config/index.js';
-import { isWriteable } from './helpers/misc.js';
 import { cyan, green, installCommandMap, renameProject, runCmd } from '@utils/index.js';
-import { getSuccessString } from '@runners/vanilla-node/utils.js';
+import { isWriteable } from './helpers/misc.js';
 
 type CreateAppParams = {
   projectName: string;
@@ -21,9 +20,9 @@ export const createApp = async ({
 }: CreateAppParams): Promise<void> => {
   try {
     const cwd = process.cwd(); // path to current working directory (shell. not including the source code file path)
-    const destPath = path.join(cwd, projectName);
+    const destPath = join(cwd, projectName);
 
-    if (!(await isWriteable(path.dirname(destPath)))) {
+    if (!(await isWriteable(dirname(destPath)))) {
       console.error(
         'The application path is not writable, please check folder permissions and try again.'
       );
@@ -32,11 +31,11 @@ export const createApp = async ({
     }
 
     const __dirname = import.meta.dirname; // path to current file (not iuncluding the file name)
-    const templatesPath = path.resolve(__dirname, '../../../templates');
-    const templatePath = path.join(templatesPath, template);
+    const templatesPath = resolve(__dirname, '../../../templates');
+    const templatePath = join(templatesPath, template);
 
     /* Copy template to destination*/
-    await fs.cp(templatePath, destPath, { recursive: true });
+    await cp(templatePath, destPath, { recursive: true });
 
     /* Modify package.json.name */
     await renameProject(projectName, destPath);
@@ -46,14 +45,6 @@ export const createApp = async ({
     console.log(`Installing dependencies with ${green(packageManager)}...`);
     await runCmd(`cd ${projectName} && ${instalCommand}`);
     console.log(`Dependencies installed ${green('successfully')}.`);
-
-    const succesString = getSuccessString(projectName, template);
-    console.log(succesString);
-
-    console.log(`Recommended next steps:`);
-    console.log(`1. ${cyan(`cd ${projectName}`)}`);
-    console.log(`2. ${cyan('code .')} (VSCode)`);
-    console.log(`3. ${cyan(`tsx run dev`)}\n`);
   } catch (error) {
     console.log('🚫 Something went wrong, error: ', error);
   }

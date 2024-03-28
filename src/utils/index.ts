@@ -58,3 +58,24 @@ export const runCmd = async (command: string): Promise<void> => {
     console.log(error);
   }
 };
+
+/*
+ *
+ */
+export const getSuccessString = (projectName: string, template: string) => {
+  const emoji = '🦉';
+  const chars = 53;
+  const extraChars = projectName.length + template.length;
+  const hashString = Array.from({ length: extraChars + chars })
+    .map(el => '#')
+    .join('');
+
+  const successString = `
+${cyan(hashString)}
+${emoji} ${green('Success!')} Created new project ${yellow.bold(
+    projectName
+  )} using template: ${yellow.italic(template)} ${emoji}
+${cyan(hashString)}
+`;
+  return successString;
+};

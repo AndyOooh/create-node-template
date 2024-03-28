@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { cyan, red, unknownHasProperty } from '@utils/index.js';
+import { cyan, getSuccessString, red, unknownHasProperty } from '@utils/index.js';
 import { isFolderEmpty } from './helpers/is-folder-empty.js';
 import { program } from './program.js';
 import { notifyUpdate } from './helpers/misc.js';
@@ -57,6 +57,14 @@ export const runWithCommander = async (): Promise<void> => {
       packageManager: pm,
       importAlias,
     });
+    const succesString = getSuccessString(projectName, template);
+    console.log(succesString);
+
+    console.log(`Recommended next steps:`);
+    console.log(`1. ${cyan(`cd ${projectName}`)}`);
+    console.log(`2. ${cyan('code .')} (VSCode)`);
+    console.log(`3. ${cyan(`tsx run dev`)}\n`);
+
     notifyUpdate();
   } catch (error) {
     console.log();
