@@ -48,7 +48,7 @@
     "build": "tsc && tsc-alias",
     "build:watch": "tsc --watch & tsc-alias --watch",
     "clean-templates": "./clean-templates.sh",
-    "copy-templates": "./clean-templates.sh cp -r templates dist/",
+    "copy-templates": "cp -r templates dist/",
     "lint": "bunx eslint . --ignore-pattern 'templates'",
     "lint:all": "bunx eslint .",
     "lint:fix": "bunx eslint . --fix --ignore-pattern 'templates'",
