@@ -67,8 +67,10 @@ Arguments and [flags](#flags) are optional.
 
 ### Flags
 
-- -t, --template
-- -pm. --package-manager
+| Flag | Description | Options | Default |
+| --- | --- | --- | --- |
+| `-t, --template` | Choose template type | `node-basic`, `express-basic`, `express-advanced` | `node-basic` |
+| `-pm. --package-manager` | Choose package manager | `npm`, `yarn`, `pnpm`, `bun` | `npm` |
 
 ## References
 
